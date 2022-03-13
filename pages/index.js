@@ -18,6 +18,7 @@ import {
   Input,
   Radio,
   RadioGroup,
+  useToast,
 } from "@chakra-ui/react";
 import Task from "@/components/Task";
 import { useState, useEffect } from "react";
@@ -27,10 +28,13 @@ import {
   collection,
   query,
   onSnapshot,
-  getDocs,
+  updateDoc,
 } from "firebase/firestore";
+import { Navbar } from "@/components/Navbar";
+import FirebaseAuth from "@/components/auth/FirebaseAuth";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { async } from "@firebase/util";
 
 export default function Home() {
   const { user, logout } = useUser();
@@ -40,7 +44,7 @@ export default function Home() {
   const [taskDetail, setTaskDetail] = useState();
   const [startDate, setStartDate] = useState();
   const [data, setData] = useState();
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+  const toast = useToast();
 
   const sendData = async (e) => {
     e.preventDefault();
@@ -52,9 +56,9 @@ export default function Home() {
         taskDate: startDate,
         completed: false,
       });
-      alert("Амжилттай");
       onClose();
       setStartDate("");
+      showToast();
     } catch (error) {
       alert(error);
     }
@@ -70,8 +74,6 @@ export default function Home() {
           tmpArray.push({ ...doc.data(), id: doc.id });
         });
         setData(tmpArray);
-        // console.log(tmpArray);
-        console.log(data);
       });
 
       return () => unsub();
@@ -91,30 +93,43 @@ export default function Home() {
     );
   });
 
+  const showToast = () => {
+    toast({
+      title: "Амжилттай",
+      description: "Даалгавар амжилттай нэмэгдлээ.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   if (user) {
     return (
-      <Box display="flex" flexDir="column" alignItems="center" h="100vh">
+      <Box
+        display="flex"
+        flexDir="column"
+        alignItems="center"
+        minH="100vh"
+        w="100%"
+      >
+        <Navbar name={user.name} logout={() => logout()} />
         <Box
           display="flex"
           flexDir="column"
-          w={{ md: "50%", base: "90%" }}
+          w={{ md: "50%", base: "96%" }}
           alignItems="center"
           mt="10"
         >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            w="100%"
-            flexDir={{ md: "row", base: "column" }}
-            alignItems="center"
-          >
-            <Text color="blue.400" fontSize="xl" mb={{ md: 0, base: "5" }}>
-              {user.name}
-              <Text display="inline" color="black">
-                's shits to do
-              </Text>
-            </Text>
-            <Button onClick={onOpen}>Даалгавар нэмэх</Button>
+          <Box w={{ md: "lg", base: "95%" }}>
+            <Button
+              onClick={onOpen}
+              _hover={{
+                bg: "teal.500",
+                color: "white",
+              }}
+            >
+              Даалгавар нэмэх
+            </Button>
           </Box>
           <Box
             mt="5"
@@ -125,7 +140,6 @@ export default function Home() {
           >
             {Cards}
           </Box>
-          <Button onClick={() => logout()}>Log Out</Button>
         </Box>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -176,19 +190,29 @@ export default function Home() {
     );
   } else
     return (
-      <Flex alignItems="center" justifyContent="center" h="100vh">
-        <Link href="/auth">
-          <Button>Нэвтрэх</Button>
-        </Link>
+      <Flex
+        alignItems="center"
+        justifyContent="center"
+        h="100vh"
+        flexDir="column"
+        w="100%"
+        bgGradient="linear(to-l, teal.300, teal.600)"
+        color="white"
+      >
+        <Box>
+          <Text
+            mt="-20"
+            fontSize={{ md: "5xl", base: "4xl" }}
+            fontWeight="semi-bold"
+          >
+            БҮХ ДААЛГАВАР
+          </Text>
+          <Text fontSize="5xl" fontWeight="bold">
+            НЭГ ДОР
+          </Text>
+        </Box>
+
+        <FirebaseAuth />
       </Flex>
     );
 }
-
-// Card.Title>{user.name}</Card.Title>
-//             <Card.Text>{user.email}</Card.Text>
-//             <hr />
-//             {user.profilePic ? (
-//               <image src={user.profilePic} height={100} width={100}></image>
-//             ) : (
-//               <p>No profile pic</p>
-//             )}

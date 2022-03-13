@@ -4,10 +4,10 @@ import { FaEdit, FaCheck, FaTrash } from "react-icons/fa";
 export default function Task(props) {
   let color;
   if (props.platformValue === "SISI") {
-    color = "purple.200";
-  } else if (props.platformValue === "TEAMS") {
     color = "blue.200";
-  } else if (props.platformValue === "БУСАД") {
+  } else if (props.platformValue === "TEAMS") {
+    color = "purple.200";
+  } else {
     color = "gray.200";
   }
   return (
@@ -35,14 +35,11 @@ export default function Task(props) {
           <Box flex="1" display="flex" alignItems="center">
             <Text fontSize="sm">{props.date} • 5 хоног</Text>
           </Box>
-          <Box display="flex" flex="1" justifyContent="space-evenly">
-            <Button>
+          <Box display="flex" flex="1" justifyContent="flex-end">
+            <Button onClick={props.toggle} mr="2">
               <FaCheck />
             </Button>
-            <Button>
-              <FaEdit />
-            </Button>
-            <Button>
+            <Button onClick={props.delete}>
               <FaTrash />
             </Button>
           </Box>
