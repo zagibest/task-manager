@@ -20,7 +20,8 @@ export const Navbar = (props) => {
       >
         {props.name}
         <Text display="inline" fontWeight="normal">
-          's shits to do
+          {" "}
+          rocks!
         </Text>
       </Text>
       <Button

@@ -32,9 +32,8 @@ import {
 } from "firebase/firestore";
 import { Navbar } from "@/components/Navbar";
 import FirebaseAuth from "@/components/auth/FirebaseAuth";
-
-import "react-datepicker/dist/react-datepicker.css";
-import { async } from "@firebase/util";
+import { FaPlus } from "react-icons/fa";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   const { user, logout } = useUser();
@@ -111,6 +110,7 @@ export default function Home() {
         alignItems="center"
         minH="100vh"
         w="100%"
+        bg="gray.50"
       >
         <Navbar name={user.name} logout={() => logout()} />
         <Box
@@ -127,6 +127,7 @@ export default function Home() {
                 bg: "teal.500",
                 color: "white",
               }}
+              rightIcon={<FaPlus />}
             >
               Даалгавар нэмэх
             </Button>
@@ -186,6 +187,7 @@ export default function Home() {
             </ModalFooter>
           </ModalContent>
         </Modal>
+        <Footer />
       </Box>
     );
   } else
