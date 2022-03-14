@@ -1,6 +1,6 @@
 import { Box, Link, Text } from "@chakra-ui/react";
 
-export const Footer = (props) => {
+export const Footer = () => {
   return (
     <Box
       h="10vh"

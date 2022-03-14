@@ -1,5 +1,8 @@
 import { Box, Text, Circle, Flex, Button, Divider } from "@chakra-ui/react";
 import { FaEdit, FaCheck, FaTrash } from "react-icons/fa";
+import { doc, deleteDoc, collection } from "firebase/firestore";
+import { useUser } from "@/lib/firebase/useUser";
+import { db } from "@/lib/firebase/initFirebase";
 
 export default function Task(props) {
   let color;
@@ -10,18 +13,13 @@ export default function Task(props) {
   } else {
     color = "gray.200";
   }
-
-  var date2 = new Date(props.startDate);
+  var date2 = new Date(props.date);
   var date1 = new Date();
 
   var Difference_In_Time = date2.getTime() - date1.getTime();
 
-  var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+  var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
 
-  const diffDays = (date, otherDate) =>
-    Math.ceil(Math.abs(date - otherDate) / (1000 * 60 * 60 * 24));
-
-  var dif = diffDays(new Date(props.startDate), new Date());
   return (
     <Box
       boxShadow="base"
@@ -47,7 +45,7 @@ export default function Task(props) {
         <Flex pt="5">
           <Box flex="1" display="flex" alignItems="center">
             <Text fontSize="sm">
-              {props.date} • {dif} хоног
+              {props.date} • {Difference_In_Days} хоног
             </Text>
           </Box>
           <Box display="flex" flex="1" justifyContent="flex-end">
@@ -62,7 +60,7 @@ export default function Task(props) {
               <FaCheck />
             </Button>
             <Button
-              onClick={props.delete}
+              onClick={() => props.deleteData(props.taskId)}
               _hover={{
                 bg: "red.500",
                 color: "white",

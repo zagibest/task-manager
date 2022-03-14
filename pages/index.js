@@ -29,6 +29,8 @@ import {
   query,
   onSnapshot,
   updateDoc,
+  doc,
+  deleteDoc,
 } from "firebase/firestore";
 import { Navbar } from "@/components/Navbar";
 import FirebaseAuth from "@/components/auth/FirebaseAuth";
@@ -78,16 +80,23 @@ export default function Home() {
       return () => unsub();
     }
   }, [user]);
+  console.log(data);
+
+  const deleteData = (taskId) => {
+    deleteDoc(doc(db, "admin", user.id, "datas", taskId));
+  };
 
   const Cards = data?.map((item) => {
     return (
       <Task
         key={item.id}
+        taskId={item.id}
         taskName={item.taskName}
         taskDetail={item.taskDetail}
         platformValue={item.value}
         date={item.taskDate}
         completed={item.completed}
+        deleteData={deleteData}
       />
     );
   });
@@ -104,89 +113,94 @@ export default function Home() {
 
   if (user) {
     return (
-      <Box
-        display="flex"
-        flexDir="column"
-        alignItems="center"
-        minH="100vh"
-        w="100%"
-        bg="gray.50"
-      >
-        <Navbar name={user.name} logout={() => logout()} />
+      <Box minH="90vh">
         <Box
           display="flex"
           flexDir="column"
-          w={{ md: "50%", base: "96%" }}
           alignItems="center"
-          mt="10"
+          minH="90vh"
+          w="100%"
+          bg="gray.50"
         >
-          <Box w={{ md: "lg", base: "95%" }}>
-            <Button
-              onClick={onOpen}
-              _hover={{
-                bg: "teal.500",
-                color: "white",
-              }}
-              rightIcon={<FaPlus />}
-            >
-              Даалгавар нэмэх
-            </Button>
-          </Box>
+          <Navbar name={user.name} logout={() => logout()} />
           <Box
-            mt="5"
-            w="100%"
             display="flex"
             flexDir="column"
+            w={{ md: "50%", base: "96%" }}
             alignItems="center"
+            mt="10"
           >
-            {Cards}
-          </Box>
-        </Box>
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Даалгавар нэмэх</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody pb={6}>
-              <FormControl>
-                <FormLabel>Даалгавар нэр</FormLabel>
-                <Input onChange={(data) => setTaskName(data.target.value)} />
-              </FormControl>
-
-              <FormControl mt={4}>
-                <FormLabel>Дэлгэрэнгүй (заавал биш)</FormLabel>
-                <Input onChange={(data) => setTaskDetail(data.target.value)} />
-              </FormControl>
-              <RadioGroup onChange={setValue} pt="5">
-                <Box>
-                  <Radio value="SISI" pr="4">
-                    Sisi
-                  </Radio>
-                  <Radio value="TEAMS" pr="4">
-                    Teams
-                  </Radio>
-                  <Radio value="БУСАД">Бусад</Radio>
-                </Box>
-              </RadioGroup>
-              <FormControl mt={4}>
-                <FormLabel>Дуусах хугацаа</FormLabel>
-                <Box border="1px" borderColor="gray.300" borderRadius="md">
-                  <Input
-                    onChange={(data) => setStartDate(data.target.value)}
-                    placeholder="2022/12/31"
-                  />
-                </Box>
-              </FormControl>
-            </ModalBody>
-
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={sendData}>
-                Нэмэх
+            <Box w={{ md: "lg", base: "95%" }}>
+              <Button
+                onClick={onOpen}
+                _hover={{
+                  bg: "teal.500",
+                  color: "white",
+                }}
+                rightIcon={<FaPlus />}
+              >
+                Даалгавар нэмэх
               </Button>
-              <Button onClick={onClose}>Хаах</Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+            </Box>
+            <Box
+              mt="5"
+              w="100%"
+              display="flex"
+              flexDir="column"
+              alignItems="center"
+            >
+              {Cards}
+            </Box>
+          </Box>
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Даалгавар нэмэх</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody pb={6}>
+                <FormControl>
+                  <FormLabel>Даалгавар нэр</FormLabel>
+                  <Input onChange={(data) => setTaskName(data.target.value)} />
+                </FormControl>
+
+                <FormControl mt={4}>
+                  <FormLabel>Дэлгэрэнгүй (заавал биш)</FormLabel>
+                  <Input
+                    onChange={(data) => setTaskDetail(data.target.value)}
+                  />
+                </FormControl>
+                <RadioGroup onChange={setValue} pt="5">
+                  <Box>
+                    <Radio value="SISI" pr="4">
+                      Sisi
+                    </Radio>
+                    <Radio value="TEAMS" pr="4">
+                      Teams
+                    </Radio>
+                    <Radio value="БУСАД">Бусад</Radio>
+                  </Box>
+                </RadioGroup>
+                <FormControl mt={4}>
+                  <FormLabel>Дуусах хугацаа</FormLabel>
+                  <Box border="1px" borderColor="gray.300" borderRadius="md">
+                    <Input
+                      type="date"
+                      onChange={(data) => setStartDate(data.target.value)}
+                      placeholder="2022/12/31"
+                    />
+                  </Box>
+                </FormControl>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button colorScheme="blue" mr={3} onClick={sendData}>
+                  Нэмэх
+                </Button>
+                <Button onClick={onClose}>Хаах</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </Box>
         <Footer />
       </Box>
     );
