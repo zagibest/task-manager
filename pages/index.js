@@ -2,7 +2,6 @@ import { useUser } from "@/lib/firebase/useUser";
 import {
   Box,
   Flex,
-  Link,
   Button,
   Text,
   Modal,
@@ -28,7 +27,6 @@ import {
   collection,
   query,
   onSnapshot,
-  updateDoc,
   doc,
   deleteDoc,
 } from "firebase/firestore";
@@ -80,7 +78,6 @@ export default function Home() {
       return () => unsub();
     }
   }, [user]);
-  console.log(data);
 
   const deleteData = (taskId) => {
     deleteDoc(doc(db, "admin", user.id, "datas", taskId));
@@ -134,7 +131,7 @@ export default function Home() {
               <Button
                 onClick={onOpen}
                 _hover={{
-                  bg: "teal.500",
+                  bg: "teal.:00",
                   color: "white",
                 }}
                 rightIcon={<FaPlus />}

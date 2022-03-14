@@ -15,7 +15,7 @@ export const Navbar = (props) => {
       <Text
         fontWeight="bold"
         ml={{ md: "10", base: 0 }}
-        mt={{ md: 0, base: "4" }}
+        mt={{ md: 0, base: "5" }}
         fontSize="xl"
       >
         {props.name}
@@ -27,7 +27,7 @@ export const Navbar = (props) => {
       <Button
         onClick={props.logout}
         mr={{ md: "10", base: 0 }}
-        mb={{ md: 0, base: "4" }}
+        mb={{ md: 0, base: "5" }}
         color="white"
         border="2px"
         bg="transparent"

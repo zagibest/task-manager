@@ -1,9 +1,5 @@
 import { Box, Text, Circle, Flex, Button, Divider } from "@chakra-ui/react";
-import { FaEdit, FaCheck, FaTrash } from "react-icons/fa";
-import { doc, deleteDoc, collection } from "firebase/firestore";
-import { useUser } from "@/lib/firebase/useUser";
-import { db } from "@/lib/firebase/initFirebase";
-
+import { FaCheck, FaTrash } from "react-icons/fa";
 export default function Task(props) {
   let color;
   if (props.platformValue === "SISI") {
@@ -34,7 +30,7 @@ export default function Task(props) {
             {props.taskName}
           </Text>
 
-          <Circle bg={color} w="20" fontSize="smaller">
+          <Circle bg={color} w="20" fontSize="smaller" h="10">
             {props.platformValue}
           </Circle>
         </Flex>
