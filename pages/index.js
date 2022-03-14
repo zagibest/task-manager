@@ -18,6 +18,7 @@ import {
   Radio,
   RadioGroup,
   useToast,
+  Image,
 } from "@chakra-ui/react";
 import Task from "@/components/Task";
 import { useState, useEffect } from "react";
@@ -131,7 +132,7 @@ export default function Home() {
               <Button
                 onClick={onOpen}
                 _hover={{
-                  bg: "teal.:00",
+                  bg: "teal.500",
                   color: "white",
                 }}
                 rightIcon={<FaPlus />}
@@ -211,21 +212,51 @@ export default function Home() {
         w="100%"
         bgGradient="linear(to-l, teal.300, teal.600)"
         color="white"
+        overflow="hidden"
       >
-        <Box>
-          <Text
-            mt="-20"
-            fontSize={{ md: "5xl", base: "4xl" }}
-            fontWeight="semi-bold"
+        <Box
+          display="flex"
+          flexDir={{ md: "row", base: "column" }}
+          mx="2"
+          textAlign="center"
+          alignItems="center"
+        >
+          <Box
+            flex="1"
+            display="flex"
+            flexDir="column"
+            alignItems="center"
+            justifyContent="center"
           >
-            БҮХ ДААЛГАВАР
-          </Text>
-          <Text fontSize="5xl" fontWeight="bold">
-            НЭГ ДОР
-          </Text>
+            <Text
+              mt="-20"
+              fontSize={{ md: "5xl", base: "4xl" }}
+              fontWeight="black"
+            >
+              БҮХ ДААЛГАВАР
+            </Text>
+            <Text
+              fontSize={{ md: "6xl", base: "5xl" }}
+              fontWeight="black"
+              mb="10"
+            >
+              НЭГ ДОР
+            </Text>
+            <FirebaseAuth />
+          </Box>
+          <Box
+            flex="1"
+            w={{ md: "100%", base: "200vw" }}
+            mb={{ base: "-300", md: 0 }}
+          >
+            <Image
+              src="./mock-up.png"
+              w={{ md: "90%", base: "90%" }}
+              m="auto"
+              mt={{ md: 0, base: "10" }}
+            />
+          </Box>
         </Box>
-
-        <FirebaseAuth />
       </Flex>
     );
 }
