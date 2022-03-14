@@ -246,17 +246,26 @@ export default function Home() {
           </Box>
           <Box
             flex="1"
-            w={{ md: "100%", base: "200vw" }}
-            mb={{ base: "-300", md: 0 }}
+            // w={{ md: "100%", base: "200vw" }}
+            mb={{ base: "-10", md: 0 }}
           >
             <Image
               src="./mock-up.png"
-              w={{ md: "90%", base: "90%" }}
+              w={{ md: "90%", base: "100%" }}
               m="auto"
               mt={{ md: 0, base: "10" }}
             />
           </Box>
         </Box>
+        <Text
+          fontWeight="light"
+          opacity="0.5"
+          fontSize="sm"
+          position="absolute"
+          bottom="10"
+        >
+          © All rights reserved - 2022
+        </Text>
       </Flex>
     );
 }
