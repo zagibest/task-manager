@@ -48,12 +48,12 @@ export default function Home() {
   const [startDate, setStartDate] = useState();
   const [data, setData] = useState();
   const [filter, setFilter] = useState(false);
-  const [buttonActive, setButtonActive] = useState(true);
+  const [buttonActive, setButtonActive] = useState(false);
   const toast = useToast();
   let buttonCol, buttonCol2;
   if (buttonActive) {
     buttonCol = "teal.500";
-    buttonCol2 = "gray.400";
+    buttonCol2 = "gray.300";
   } else {
     buttonCol = "gray.300";
     buttonCol2 = "teal.500";
@@ -185,9 +185,10 @@ export default function Home() {
                   setButtonActive(false);
                 }}
                 borderRadius="0"
+                borderLeftRadius="8"
               >
-                Хийх
-                <Text display="inline" fontWeight="bold" pl="1">
+                Хийх:
+                <Text display="inline" fontWeight="bold" pl="1" fontSize="lg">
                   {t2}
                 </Text>
               </Button>
@@ -200,9 +201,10 @@ export default function Home() {
                   setFilter(true);
                   setButtonActive(true);
                 }}
+                borderRightRadius="8"
               >
-                Хийсэн
-                <Text display="inline" fontWeight="bold" pl="1">
+                Хийсэн:
+                <Text display="inline" fontWeight="bold" pl="1" fontSize="lg">
                   {t}
                 </Text>
               </Button>
