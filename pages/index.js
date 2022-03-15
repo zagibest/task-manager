@@ -163,7 +163,7 @@ export default function Home() {
           display="flex"
           flexDir="column"
           alignItems="center"
-          minH="90vh"
+          minH="100vh"
           w="100%"
           bg="gray.50"
         >
@@ -186,6 +186,12 @@ export default function Home() {
                 }}
                 borderRadius="0"
                 borderLeftRadius="8"
+                _focus={{
+                  bg: { buttonCol2 },
+                }}
+                _hover={{
+                  bg: { buttonCol2 },
+                }}
               >
                 Хийх:
                 <Text display="inline" fontWeight="bold" pl="1" fontSize="lg">
@@ -202,6 +208,12 @@ export default function Home() {
                   setButtonActive(true);
                 }}
                 borderRightRadius="8"
+                _focus={{
+                  bg: { buttonCol },
+                }}
+                _hover={{
+                  bg: { buttonCol2 },
+                }}
               >
                 Хийсэн:
                 <Text display="inline" fontWeight="bold" pl="1" fontSize="lg">
