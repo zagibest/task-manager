@@ -19,10 +19,20 @@ export default function Task(props) {
 
   var date2 = new Date(props.date);
   var date1 = new Date();
+  let dayColor;
 
   var Difference_In_Time = date2.getTime() - date1.getTime();
 
-  var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
+  var Difference_In_Days =
+    Math.floor(Difference_In_Time / (1000 * 3600 * 24)) + 1;
+
+  if (Difference_In_Days < 0) {
+    Difference_In_Days = "Хугацаа дууссан";
+    dayColor = "red.500";
+  } else {
+    Difference_In_Days = Difference_In_Days + " хоног";
+    dayColor = "black";
+  }
 
   return (
     <Box
@@ -31,10 +41,9 @@ export default function Task(props) {
       w={{ md: "lg", base: "95%" }}
       mb="5"
       bg="white"
-      opacity={completed}
       position="relative"
     >
-      <Box p="5">
+      <Box p="5" opacity={completed}>
         <Flex justifyContent="space-between">
           <Text fontSize="xl" as="b">
             {props.taskName}
@@ -51,7 +60,10 @@ export default function Task(props) {
         <Flex pt="5">
           <Box flex="1" display="flex" alignItems="center">
             <Text fontSize="sm">
-              {props.date} • {Difference_In_Days} хоног
+              {props.date} •{" "}
+              <Text color={dayColor} display="inline">
+                {Difference_In_Days}
+              </Text>
             </Text>
           </Box>
           <Box display="flex" flex="1" justifyContent="flex-end">

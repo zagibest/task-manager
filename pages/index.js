@@ -31,6 +31,7 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  orderBy,
 } from "firebase/firestore";
 import { Navbar } from "@/components/Navbar";
 import FirebaseAuth from "@/components/auth/FirebaseAuth";
@@ -59,6 +60,8 @@ export default function Home() {
       });
       onClose();
       setStartDate("");
+      setTaskName("");
+      setTaskDetail("");
       showToast();
     } catch (error) {
       alert(error);
@@ -67,7 +70,10 @@ export default function Home() {
 
   useEffect(() => {
     if (user) {
-      const q = query(collection(db, "admin", user?.id, "datas"));
+      const q = query(
+        collection(db, "admin", user?.id, "datas"),
+        orderBy("taskDate")
+      );
 
       const unsub = onSnapshot(q, (querySnapshot) => {
         let tmpArray = [];
@@ -90,8 +96,9 @@ export default function Home() {
       completed: !completed,
     });
   };
-
+  const t = 0;
   const Cards = data?.map((item) => {
+    t++;
     return (
       <Task
         key={item.id}
@@ -103,6 +110,7 @@ export default function Home() {
         completed={item.completed}
         deleteData={deleteData}
         toggleCompleted={toggleCompleted}
+        listNo={t}
       />
     );
   });
@@ -164,7 +172,7 @@ export default function Home() {
               <ModalHeader>Даалгавар нэмэх</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
-                <FormControl>
+                <FormControl isRequired>
                   <FormLabel>Даалгавар нэр</FormLabel>
                   <Input onChange={(data) => setTaskName(data.target.value)} />
                 </FormControl>
@@ -186,7 +194,7 @@ export default function Home() {
                     <Radio value="БУСАД">Бусад</Radio>
                   </Box>
                 </RadioGroup>
-                <FormControl mt={4}>
+                <FormControl mt={4} isRequired>
                   <FormLabel>Дуусах хугацаа</FormLabel>
                   <Box border="1px" borderColor="gray.300" borderRadius="md">
                     <Input
