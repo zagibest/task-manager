@@ -1,11 +1,25 @@
-import { Box, Text, Circle, Flex, Button, Divider } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Circle,
+  Flex,
+  Button,
+  Divider,
+  Image,
+} from "@chakra-ui/react";
 import { FaCheck, FaTrash } from "react-icons/fa";
 export default function Task(props) {
-  let color;
+  let color, imgSrc, svgHeight, svgMargin;
   if (props.platformValue === "SISI") {
     color = "blue.200";
+    imgSrc = "./sisi.svg";
+    svgHeight = "4";
+    svgMargin = "2";
   } else if (props.platformValue === "TEAMS") {
     color = "purple.200";
+    imgSrc = "./teams.svg";
+    svgHeight = "5";
+    svgMargin = "1";
   } else {
     color = "gray.200";
   }
@@ -52,7 +66,8 @@ export default function Task(props) {
             {props.taskName}
           </Text>
 
-          <Circle bg={color} w="20" fontSize="smaller" h="10">
+          <Circle bg={color} w="24" fontSize="smaller" h="10">
+            <Image src={imgSrc} display="inline" mr={svgMargin} h={svgHeight} />
             {props.platformValue}
           </Circle>
         </Flex>
