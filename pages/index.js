@@ -30,6 +30,7 @@ import {
   onSnapshot,
   doc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { Navbar } from "@/components/Navbar";
 import FirebaseAuth from "@/components/auth/FirebaseAuth";
@@ -84,6 +85,12 @@ export default function Home() {
     deleteDoc(doc(db, "admin", user.id, "datas", taskId));
   };
 
+  const toggleCompleted = (taskId, completed) => {
+    updateDoc(doc(db, "admin", user.id, "datas", taskId), {
+      completed: !completed,
+    });
+  };
+
   const Cards = data?.map((item) => {
     return (
       <Task
@@ -95,6 +102,7 @@ export default function Home() {
         date={item.taskDate}
         completed={item.completed}
         deleteData={deleteData}
+        toggleCompleted={toggleCompleted}
       />
     );
   });

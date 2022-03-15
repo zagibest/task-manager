@@ -9,6 +9,14 @@ export default function Task(props) {
   } else {
     color = "gray.200";
   }
+
+  let completed;
+  if (props.completed) {
+    completed = 0.5;
+  } else {
+    completed = 1;
+  }
+
   var date2 = new Date(props.date);
   var date1 = new Date();
 
@@ -23,6 +31,8 @@ export default function Task(props) {
       w={{ md: "lg", base: "95%" }}
       mb="5"
       bg="white"
+      opacity={completed}
+      position="relative"
     >
       <Box p="5">
         <Flex justifyContent="space-between">
@@ -46,12 +56,14 @@ export default function Task(props) {
           </Box>
           <Box display="flex" flex="1" justifyContent="flex-end">
             <Button
-              onClick={props.toggle}
               mr="2"
               _hover={{
                 bg: "teal.500",
                 color: "white",
               }}
+              onClick={() =>
+                props.toggleCompleted(props.taskId, props.completed)
+              }
             >
               <FaCheck />
             </Button>
