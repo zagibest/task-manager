@@ -31,7 +31,7 @@ export default function Task(props) {
     dayColor = "red.500";
   } else {
     Difference_In_Days = Difference_In_Days + " хоног";
-    dayColor = "black";
+    dayColor = "teal.500";
   }
 
   return (
@@ -61,7 +61,7 @@ export default function Task(props) {
           <Box flex="1" display="flex" alignItems="center">
             <Text fontSize="sm">
               {props.date} •{" "}
-              <Text color={dayColor} display="inline">
+              <Text color={dayColor} display="inline" fontWeight="semibold">
                 {Difference_In_Days}
               </Text>
             </Text>

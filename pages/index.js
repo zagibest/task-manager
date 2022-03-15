@@ -35,7 +35,7 @@ import {
 } from "firebase/firestore";
 import { Navbar } from "@/components/Navbar";
 import FirebaseAuth from "@/components/auth/FirebaseAuth";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaCheck } from "react-icons/fa";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -46,6 +46,7 @@ export default function Home() {
   const [taskDetail, setTaskDetail] = useState();
   const [startDate, setStartDate] = useState();
   const [data, setData] = useState();
+  const [filter, setFilter] = useState(false);
   const toast = useToast();
 
   const sendData = async (e) => {
@@ -96,23 +97,43 @@ export default function Home() {
       completed: !completed,
     });
   };
-  const t = 0;
+  const t = 0,
+    t2 = 0;
   const Cards = data?.map((item) => {
-    t++;
-    return (
-      <Task
-        key={item.id}
-        taskId={item.id}
-        taskName={item.taskName}
-        taskDetail={item.taskDetail}
-        platformValue={item.value}
-        date={item.taskDate}
-        completed={item.completed}
-        deleteData={deleteData}
-        toggleCompleted={toggleCompleted}
-        listNo={t}
-      />
-    );
+    if (item.completed == true) {
+      t++;
+    } else {
+      t2++;
+    }
+    if (filter && item.completed) {
+      return (
+        <Task
+          key={item.id}
+          taskId={item.id}
+          taskName={item.taskName}
+          taskDetail={item.taskDetail}
+          platformValue={item.value}
+          date={item.taskDate}
+          completed={item.completed}
+          deleteData={deleteData}
+          toggleCompleted={toggleCompleted}
+        />
+      );
+    } else if (!filter && !item.completed) {
+      return (
+        <Task
+          key={item.id}
+          taskId={item.id}
+          taskName={item.taskName}
+          taskDetail={item.taskDetail}
+          platformValue={item.value}
+          date={item.taskDate}
+          completed={item.completed}
+          deleteData={deleteData}
+          toggleCompleted={toggleCompleted}
+        />
+      );
+    }
   });
 
   const showToast = () => {
@@ -144,7 +165,11 @@ export default function Home() {
             alignItems="center"
             mt="10"
           >
-            <Box w={{ md: "lg", base: "95%" }}>
+            <Box
+              w={{ md: "lg", base: "95%" }}
+              display="flex"
+              justifyContent="space-between"
+            >
               <Button
                 onClick={onOpen}
                 _hover={{
@@ -155,6 +180,35 @@ export default function Home() {
               >
                 Даалгавар нэмэх
               </Button>
+              {filter ? (
+                <Button
+                  onClick={() => setFilter(!filter)}
+                  _hover={{
+                    bg: "teal.500",
+                    color: "white",
+                  }}
+                  leftIcon={<FaCheck />}
+                >
+                  Хийх
+                  <Text display="inline" fontWeight="bold" pl="1">
+                    {t2}
+                  </Text>
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => setFilter(!filter)}
+                  _hover={{
+                    bg: "teal.500",
+                    color: "white",
+                  }}
+                  leftIcon={<FaCheck />}
+                >
+                  Хийсэн
+                  <Text display="inline" fontWeight="bold" pl="1">
+                    {t}
+                  </Text>
+                </Button>
+              )}
             </Box>
             <Box
               mt="5"
@@ -166,6 +220,7 @@ export default function Home() {
               {Cards}
             </Box>
           </Box>
+          <Box></Box>
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
