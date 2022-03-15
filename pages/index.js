@@ -19,7 +19,6 @@ import {
   RadioGroup,
   useToast,
   Image,
-  ButtonGroup,
 } from "@chakra-ui/react";
 import Task from "@/components/Task";
 import { useState, useEffect } from "react";
@@ -36,7 +35,7 @@ import {
 } from "firebase/firestore";
 import { Navbar } from "@/components/Navbar";
 import FirebaseAuth from "@/components/auth/FirebaseAuth";
-import { FaPlus, FaCheck } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -50,13 +49,19 @@ export default function Home() {
   const [filter, setFilter] = useState(false);
   const [buttonActive, setButtonActive] = useState(false);
   const toast = useToast();
-  let buttonCol, buttonCol2;
+
+  let buttonCol, buttonCol2, shadow, shadow2;
   if (buttonActive) {
     buttonCol = "teal.500";
     buttonCol2 = "gray.300";
+
+    shadow = "base";
+    shadow2 = "none";
   } else {
     buttonCol = "gray.300";
     buttonCol2 = "teal.500";
+    shadow = "none";
+    shadow2 = "base";
   }
 
   const sendData = async (e) => {
@@ -192,6 +197,7 @@ export default function Home() {
                 _hover={{
                   bg: { buttonCol2 },
                 }}
+                boxShadow={shadow2}
               >
                 Хийх:
                 <Text display="inline" fontWeight="bold" pl="1" fontSize="lg">
@@ -214,6 +220,7 @@ export default function Home() {
                 _hover={{
                   bg: { buttonCol2 },
                 }}
+                boxShadow={shadow}
               >
                 Хийсэн:
                 <Text display="inline" fontWeight="bold" pl="1" fontSize="lg">
