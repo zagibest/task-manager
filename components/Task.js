@@ -29,6 +29,9 @@ export default function Task(props) {
   if (Difference_In_Days < 0) {
     Difference_In_Days = "Хугацаа дууссан";
     dayColor = "red.500";
+  } else if (Difference_In_Days == 0) {
+    Difference_In_Days = "Өнөөдөр";
+    dayColor = "teal.500";
   } else {
     Difference_In_Days = Difference_In_Days + " хоног";
     dayColor = "teal.500";
