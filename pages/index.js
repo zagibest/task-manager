@@ -19,6 +19,7 @@ import {
   RadioGroup,
   useToast,
   Image,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import Task from "@/components/Task";
 import { useState, useEffect } from "react";
@@ -47,7 +48,16 @@ export default function Home() {
   const [startDate, setStartDate] = useState();
   const [data, setData] = useState();
   const [filter, setFilter] = useState(false);
+  const [buttonActive, setButtonActive] = useState(true);
   const toast = useToast();
+  let buttonCol, buttonCol2;
+  if (buttonActive) {
+    buttonCol = "teal.500";
+    buttonCol2 = "gray.400";
+  } else {
+    buttonCol = "gray.300";
+    buttonCol2 = "teal.500";
+  }
 
   const sendData = async (e) => {
     e.preventDefault();
@@ -165,6 +175,38 @@ export default function Home() {
             alignItems="center"
             mt="10"
           >
+            <Box w={{ md: "lg", base: "95%" }} display="flex" mb="5">
+              <Button
+                color="white"
+                bg={buttonCol2}
+                flex="1"
+                onClick={() => {
+                  setFilter(false);
+                  setButtonActive(false);
+                }}
+                borderRadius="0"
+              >
+                Хийх
+                <Text display="inline" fontWeight="bold" pl="1">
+                  {t2}
+                </Text>
+              </Button>
+              <Button
+                color="white"
+                bg={buttonCol}
+                borderRadius="5, 0"
+                flex="1"
+                onClick={() => {
+                  setFilter(true);
+                  setButtonActive(true);
+                }}
+              >
+                Хийсэн
+                <Text display="inline" fontWeight="bold" pl="1">
+                  {t}
+                </Text>
+              </Button>
+            </Box>
             <Box
               w={{ md: "lg", base: "95%" }}
               display="flex"
@@ -176,39 +218,10 @@ export default function Home() {
                   bg: "teal.500",
                   color: "white",
                 }}
-                rightIcon={<FaPlus />}
+                leftIcon={<FaPlus />}
               >
                 Даалгавар нэмэх
               </Button>
-              {filter ? (
-                <Button
-                  onClick={() => setFilter(!filter)}
-                  _hover={{
-                    bg: "teal.500",
-                    color: "white",
-                  }}
-                  leftIcon={<FaCheck />}
-                >
-                  Хийх
-                  <Text display="inline" fontWeight="bold" pl="1">
-                    {t2}
-                  </Text>
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => setFilter(!filter)}
-                  _hover={{
-                    bg: "teal.500",
-                    color: "white",
-                  }}
-                  leftIcon={<FaCheck />}
-                >
-                  Хийсэн
-                  <Text display="inline" fontWeight="bold" pl="1">
-                    {t}
-                  </Text>
-                </Button>
-              )}
             </Box>
             <Box
               mt="5"

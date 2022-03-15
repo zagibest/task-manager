@@ -6,6 +6,7 @@ import {
   Button,
   Divider,
   Image,
+  Tooltip,
 } from "@chakra-ui/react";
 import { FaCheck, FaTrash } from "react-icons/fa";
 export default function Task(props) {
@@ -13,15 +14,15 @@ export default function Task(props) {
   if (props.platformValue === "SISI") {
     color = "blue.200";
     imgSrc = "./sisi.svg";
-    svgHeight = "4";
-    svgMargin = "2";
+    svgHeight = "5";
   } else if (props.platformValue === "TEAMS") {
     color = "purple.200";
-    imgSrc = "./teams.svg";
+    imgSrc = "./teamz.svg";
     svgHeight = "5";
-    svgMargin = "1";
   } else {
     color = "gray.200";
+    imgSrc = "./book.svg";
+    svgHeight = "5";
   }
 
   let completed;
@@ -46,6 +47,9 @@ export default function Task(props) {
   } else if (Difference_In_Days == 0) {
     Difference_In_Days = "Өнөөдөр";
     dayColor = "teal.500";
+  } else if (Difference_In_Days == 1) {
+    Difference_In_Days = "Маргааш";
+    dayColor = "teal.500";
   } else {
     Difference_In_Days = Difference_In_Days + " хоног";
     dayColor = "teal.500";
@@ -65,11 +69,11 @@ export default function Task(props) {
           <Text fontSize="xl" as="b">
             {props.taskName}
           </Text>
-
-          <Circle bg={color} w="24" fontSize="smaller" h="10">
-            <Image src={imgSrc} display="inline" mr={svgMargin} h={svgHeight} />
-            {props.platformValue}
-          </Circle>
+          <Tooltip label={props.platformValue}>
+            <Circle bg={color} w="14" fontSize="smaller" h="10">
+              <Image src={imgSrc} display="inline" h="5" />
+            </Circle>
+          </Tooltip>
         </Flex>
         <Flex justifyContent="space-between" pt="5">
           <Text>{props.taskDetail}</Text>
