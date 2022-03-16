@@ -285,6 +285,7 @@ export default function Home() {
                   <Box border="1px" borderColor="gray.300" borderRadius="md">
                     <Input
                       type="date"
+                      colorScheme="teal"
                       onChange={(data) => setStartDate(data.target.value)}
                       placeholder="2022/12/31"
                     />
@@ -293,7 +294,7 @@ export default function Home() {
               </ModalBody>
 
               <ModalFooter>
-                <Button colorScheme="blue" mr={3} onClick={sendData}>
+                <Button colorScheme="teal" mr={3} onClick={sendData}>
                   Нэмэх
                 </Button>
                 <Button onClick={onClose}>Хаах</Button>

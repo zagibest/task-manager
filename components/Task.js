@@ -18,7 +18,7 @@ export default function Task(props) {
   } else if (props.platformValue === "TEAMS") {
     color = "purple.200";
     imgSrc = "./teamz.svg";
-    svgHeight = "5";
+    svgHeight = "6";
   } else {
     color = "gray.200";
     imgSrc = "./book.svg";
@@ -27,7 +27,7 @@ export default function Task(props) {
 
   let completed;
   if (props.completed) {
-    completed = 0.5;
+    completed = 0.7;
   } else {
     completed = 1;
   }
@@ -71,12 +71,12 @@ export default function Task(props) {
           </Text>
           <Tooltip label={props.platformValue}>
             <Circle bg={color} w="14" fontSize="smaller" h="10">
-              <Image src={imgSrc} display="inline" h="5" />
+              <Image src={imgSrc} display="inline" h={svgHeight} />
             </Circle>
           </Tooltip>
         </Flex>
         <Flex justifyContent="space-between" pt="5">
-          <Text>{props.taskDetail}</Text>
+          <Text fontSize="16">{props.taskDetail}</Text>
         </Flex>
         <Divider py="2" />
         <Flex pt="5">

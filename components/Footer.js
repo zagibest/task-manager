@@ -3,7 +3,7 @@ import { Box, Link, Text } from "@chakra-ui/react";
 export const Footer = () => {
   return (
     <Box
-      h="10vh"
+      h="8vh"
       display="flex"
       justifyContent="space-between"
       alignItems="center"
@@ -12,7 +12,7 @@ export const Footer = () => {
       color="white"
       w="100%"
     >
-      <Text fontSize="md" m="auto">
+      <Text fontSize="sm" m="auto">
         Crafted with ❤️ by
         <Link
           display="inline"
