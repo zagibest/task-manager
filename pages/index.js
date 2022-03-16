@@ -228,11 +228,7 @@ export default function Home() {
                 </Text>
               </Button>
             </Box>
-            <Box
-              w={{ md: "lg", base: "95%" }}
-              display="flex"
-              justifyContent="space-between"
-            >
+            <Box w={{ md: "lg", base: "95%" }} display="flex">
               <Button
                 onClick={onOpen}
                 _hover={{
@@ -240,6 +236,7 @@ export default function Home() {
                   color: "white",
                 }}
                 leftIcon={<FaPlus />}
+                w="100%"
               >
                 Даалгавар нэмэх
               </Button>
