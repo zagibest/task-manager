@@ -81,7 +81,7 @@ export default function Task(props) {
         <Divider py="2" />
         <Flex pt="5">
           <Box flex="1" display="flex" alignItems="center">
-            <Text fontSize="sm">
+            <Text fontSize="sm" color="blackAlpha.700">
               {props.date} •{" "}
               <Text color={dayColor} display="inline" fontWeight="semibold">
                 {Difference_In_Days}
@@ -98,6 +98,7 @@ export default function Task(props) {
               onClick={() =>
                 props.toggleCompleted(props.taskId, props.completed)
               }
+              color="blackAlpha.700"
             >
               <FaCheck />
             </Button>
@@ -107,6 +108,7 @@ export default function Task(props) {
                 bg: "red.500",
                 color: "white",
               }}
+              color="blackAlpha.700"
             >
               <FaTrash />
             </Button>
