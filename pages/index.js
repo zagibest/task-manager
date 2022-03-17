@@ -360,15 +360,6 @@ export default function Home() {
             />
           </Box>
         </Box>
-        <Text
-          fontWeight="light"
-          opacity="0.5"
-          fontSize="sm"
-          position="absolute"
-          bottom="10"
-        >
-          © All rights reserved - 2022
-        </Text>
       </Flex>
     );
 }

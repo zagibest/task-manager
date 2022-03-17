@@ -7,16 +7,18 @@ export const Footer = () => {
       display="flex"
       alignItems="center"
       bg="teal.500"
-      color="whiteAlpha.700"
+      color="whiteAlpha.800"
       w="100%"
+      justifyContent="space-evenly"
     >
-      <Text fontSize="sm" m="auto">
+      <Text fontSize="sm">
         Crafted with ❤️ by
         <Link
           display="inline"
           href="https://zagi.live/"
           _hover={{
             color: "white",
+            fontWeight: "black",
           }}
         >
           <Text fontWeight="bold" display="inline">
@@ -25,6 +27,15 @@ export const Footer = () => {
           </Text>
         </Link>
       </Text>
+      <Link
+        href="mailto:zagig35@gmail.com"
+        _hover={{
+          color: "white",
+          fontWeight: "bold",
+        }}
+      >
+        <Text fontSize="sm">Холбогдох</Text>
+      </Link>
     </Box>
   );
 };
