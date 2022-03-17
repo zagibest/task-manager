@@ -172,7 +172,7 @@ export default function Home() {
           w="100%"
           bg="gray.50"
         >
-          <Navbar name={user.name} logout={() => logout()} />
+          <Navbar name={user.name} logout={() => logout()} photo={user.photo} />
           <Box
             display="flex"
             flexDir="column"

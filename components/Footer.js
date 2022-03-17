@@ -5,11 +5,9 @@ export const Footer = () => {
     <Box
       h="8vh"
       display="flex"
-      justifyContent="space-between"
       alignItems="center"
-      flexDir={{ md: "row", base: "column" }}
       bg="teal.500"
-      color="white"
+      color="whiteAlpha.700"
       w="100%"
     >
       <Text fontSize="sm" m="auto">
