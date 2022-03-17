@@ -63,6 +63,7 @@ export default function Task(props) {
       mb="5"
       bg="white"
       position="relative"
+      color="blackAlpha.900"
     >
       <Box p="5" opacity={completed}>
         <Flex justifyContent="space-between">
