@@ -20,6 +20,8 @@ import {
   useToast,
   Image,
   Icon,
+  SlideFade,
+  Slide,
 } from "@chakra-ui/react";
 import Task from "@/components/Task";
 import { useState, useEffect } from "react";
@@ -334,24 +336,36 @@ export default function Home() {
             alignItems="center"
             justifyContent="center"
           >
-            <Text
-              mt="-20"
-              fontSize={{ md: "5xl", base: "4xl" }}
-              fontWeight="black"
-              color="blackAlpha.900"
+            <SlideFade
+              direction="top"
+              in={true}
+              transition={{ enter: { duration: 0.4, delay: 0.3 } }}
             >
-              БҮХ ДААЛГАВАР
-            </Text>
+              <Text
+                mt="-20"
+                fontSize={{ md: "5xl", base: "4xl" }}
+                fontWeight="black"
+                color="blackAlpha.900"
+              >
+                БҮХ ДААЛГАВАР
+              </Text>
+            </SlideFade>
+            <SlideFade
+              direction="top"
+              in={true}
+              transition={{ enter: { duration: 0.4, delay: 0.5 } }}
+            >
+              <Text
+                fontSize={{ md: "7xl", base: "6xl" }}
+                fontWeight="black"
+                mb="10"
+                bgGradient="linear(to-l, teal.400, teal.500)"
+                bgClip="text"
+              >
+                НЭГ ДОР
+              </Text>
+            </SlideFade>
 
-            <Text
-              fontSize={{ md: "7xl", base: "6xl" }}
-              fontWeight="black"
-              mb="10"
-              bgGradient="linear(to-l, teal.400, teal.500)"
-              bgClip="text"
-            >
-              НЭГ ДОР
-            </Text>
             <FirebaseAuth />
           </Box>
           <Box
@@ -361,26 +375,33 @@ export default function Home() {
             position={"relative"}
             mx="5"
           >
-            <Image
-              src="./mock-up.png"
-              w={{ md: "90%", base: "100%" }}
-              m="auto"
-              mt={{ md: 0, base: "10" }}
-            />
-            <Blob
-              color="teal.50"
-              w={"120%"}
-              h={"140%"}
-              position={"absolute"}
-              top={{ md: "-20%", base: "-10%" }}
-              right={{ md: 2.5, base: 0 }}
-              zIndex={-1}
-            />
+            <SlideFade
+              direction="top"
+              in={true}
+              transition={{ enter: { duration: 0.4, delay: 0.7 } }}
+            >
+              <Image
+                src="./mock-up.png"
+                w={{ md: "90%", base: "100%" }}
+                m="auto"
+                mt={{ md: 0, base: "10" }}
+              />
+              <Blob
+                color="teal.50"
+                w={"120%"}
+                h={"140%"}
+                position={"absolute"}
+                top={{ md: "-20%", base: "-10%" }}
+                right={{ md: 2.5, base: 0 }}
+                zIndex={-1}
+              />
+            </SlideFade>
           </Box>
         </Box>
       </Flex>
     );
 }
+
 export const Blob = (props) => {
   return (
     <Icon
