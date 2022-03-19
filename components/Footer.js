@@ -18,7 +18,6 @@ export const Footer = () => {
           href="https://zagi.live/"
           _hover={{
             color: "white",
-            fontWeight: "black",
           }}
         >
           <Text fontWeight="bold" display="inline">
@@ -31,7 +30,6 @@ export const Footer = () => {
         href="mailto:zagig35@gmail.com"
         _hover={{
           color: "white",
-          fontWeight: "bold",
         }}
       >
         <Text fontSize="sm">Холбогдох</Text>

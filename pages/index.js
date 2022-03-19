@@ -19,7 +19,6 @@ import {
   RadioGroup,
   useToast,
   Image,
-  Icon,
   SlideFade,
 } from "@chakra-ui/react";
 import Task from "@/components/Task";

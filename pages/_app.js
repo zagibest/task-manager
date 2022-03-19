@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider resetCSS theme={theme}>
       <Head>
-        <title>NUMee</title>
+        <title>NUMO</title>
         <link rel="manifest" href="./site.webmanifest"></link>
         <meta
           name="viewport"

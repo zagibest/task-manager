@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { FaCheck, FaTrash } from "react-icons/fa";
 export default function Task(props) {
-  let color, imgSrc, svgHeight, svgMargin;
+  let color, imgSrc, svgHeight;
   if (props.platformValue === "SISI") {
     color = "blue.200";
     imgSrc = "./sisi.svg";

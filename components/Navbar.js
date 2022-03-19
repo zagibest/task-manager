@@ -7,7 +7,6 @@ export const Navbar = (props) => {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      // flexDir={{ md: "row", base: "column" }}
       bg="teal.500"
       color="white"
       w="100%"
@@ -18,13 +17,7 @@ export const Navbar = (props) => {
         display="flex"
         alignItems="center"
       >
-        <Image
-          src={props.photo}
-          h="50%"
-          mr="2"
-          // fallbackSrc="https://via.placeholder.com/150"
-          borderRadius="full"
-        />
+        <Image src={props.photo} h="50%" mr="2" borderRadius="full" />
         <Text fontWeight="bold" fontSize={{ md: "lg", base: "md" }}>
           {props.name}
           <Text display="inline" fontWeight="normal">
