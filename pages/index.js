@@ -337,35 +337,53 @@ export default function Home() {
             alignItems="center"
             justifyContent="center"
           >
-            <SlideFade
-              direction="top"
-              in={true}
-              transition={{ enter: { duration: 0.4, delay: 0.3 } }}
-            >
-              <Text
-                mt="-20"
-                fontSize={{ md: "5xl", base: "4xl" }}
-                fontWeight="black"
-                color="blackAlpha.900"
+            <Box w={{ md: "75%", base: "90%" }} textAlign="center">
+              <SlideFade
+                direction="top"
+                in={true}
+                transition={{ enter: { duration: 0.4, delay: 0.3 } }}
               >
-                БҮХ ДААЛГАВАР
-              </Text>
-            </SlideFade>
-            <SlideFade
-              direction="top"
-              in={true}
-              transition={{ enter: { duration: 0.4, delay: 0.5 } }}
-            >
-              <Text
-                fontSize={{ md: "7xl", base: "6xl" }}
-                fontWeight="black"
-                mb="10"
-                bgGradient="linear(to-l, teal.400, teal.500)"
-                bgClip="text"
+                <Text
+                  mt="-10"
+                  fontSize={{ md: "5xl", base: "4xl" }}
+                  fontWeight="black"
+                  color="blackAlpha.900"
+                >
+                  БҮХ ДААЛГАВАР
+                </Text>
+              </SlideFade>
+              <SlideFade
+                direction="top"
+                in={true}
+                transition={{ enter: { duration: 0.4, delay: 0.5 } }}
               >
-                НЭГ ДОР
-              </Text>
-            </SlideFade>
+                <Text
+                  fontSize={{ md: "7xl", base: "6xl" }}
+                  fontWeight="black"
+                  bgGradient="linear(to-l, teal.400, teal.500)"
+                  bgClip="text"
+                  mt="-5"
+                >
+                  НЭГ ДОР
+                </Text>
+              </SlideFade>
+            </Box>
+            <Box
+              w={{ md: "75%", base: "90%" }}
+              mb={{ md: "10", base: "5" }}
+              mt="2"
+            >
+              <SlideFade
+                direction="top"
+                in={true}
+                transition={{ enter: { duration: 0.4, delay: 0.5 } }}
+              >
+                <Text fontWeight="light" fontSize="lg" textAlign="center">
+                  Teams Sisi дээр зэрэг даалгавар орохоор мартчихаад байгаа биз
+                  😝. NUMO дээр даалгавараа тэмдэглээд амар тайван унтаарай!
+                </Text>
+              </SlideFade>
+            </Box>
 
             <FirebaseAuth />
           </Box>
