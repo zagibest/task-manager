@@ -314,11 +314,9 @@ export default function Home() {
       <Flex
         alignItems="center"
         justifyContent="center"
-        h="100vh"
+        minH="100vh"
         flexDir="column"
         w="100%"
-        // bgGradient="linear(to-l, teal.300, teal.600)"
-        // bg="white"
         color="black"
         overflow="hidden"
       >
@@ -337,17 +335,18 @@ export default function Home() {
             alignItems="center"
             justifyContent="center"
           >
-            <Box w={{ md: "75%", base: "90%" }} textAlign="center">
+            <Box w={{ md: "80%", base: "90%" }} textAlign="center">
               <SlideFade
                 direction="top"
                 in={true}
                 transition={{ enter: { duration: 0.4, delay: 0.3 } }}
               >
                 <Text
-                  mt="-10"
+                  mt={{ md: "-10", base: "10" }}
                   fontSize={{ md: "5xl", base: "4xl" }}
-                  fontWeight="black"
-                  color="blackAlpha.900"
+                  fontWeight="900"
+                  color="black"
+                  fontFamily="heading"
                 >
                   БҮХ ДААЛГАВАР
                 </Text>
@@ -359,17 +358,18 @@ export default function Home() {
               >
                 <Text
                   fontSize={{ md: "7xl", base: "6xl" }}
-                  fontWeight="black"
+                  fontWeight="900"
                   bgGradient="linear(to-l, teal.400, teal.500)"
                   bgClip="text"
                   mt="-5"
+                  fontFamily="heading"
                 >
                   НЭГ ДОР
                 </Text>
               </SlideFade>
             </Box>
             <Box
-              w={{ md: "75%", base: "90%" }}
+              w={{ md: "80%", base: "90%" }}
               mb={{ md: "10", base: "5" }}
               mt="2"
             >
@@ -400,10 +400,17 @@ export default function Home() {
               transition={{ enter: { duration: 0.4, delay: 0.7 } }}
             >
               <Image
-                src="./mock-up.png"
+                src="./mac-mock.png"
                 w={{ md: "90%", base: "100%" }}
                 m="auto"
                 mt={{ md: 0, base: "10" }}
+                alt="NUMo being used on macbook"
+                display={{ base: "none", md: "block" }}
+              />
+              <Image
+                src="./ip-mock.png"
+                w={{ md: "90%", base: "100%" }}
+                display={{ md: "none" }}
               />
               <Blob
                 color="teal.50"
