@@ -1,4 +1,4 @@
-import { Box, Button, Text, Image } from "@chakra-ui/react";
+import { Box, Button, Text, Image, Link } from "@chakra-ui/react";
 
 export const Navbar = (props) => {
   return (
@@ -17,14 +17,11 @@ export const Navbar = (props) => {
         display="flex"
         alignItems="center"
       >
-        <Image src={props.photo} h="50%" mr="2" borderRadius="full" />
-        <Text fontWeight="bold" fontSize={{ md: "lg", base: "md" }}>
-          {props.name}
-          <Text display="inline" fontWeight="normal">
-            {" "}
-            rocks!
+        <Link href="/">
+          <Text fontWeight="bold" fontSize={{ md: "lg", base: "md" }}>
+            NUMO
           </Text>
-        </Text>
+        </Link>
       </Box>
 
       <Button

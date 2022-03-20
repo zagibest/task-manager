@@ -38,7 +38,7 @@ import {
 } from "firebase/firestore";
 import { Navbar } from "@/components/Navbar";
 import FirebaseAuth from "@/components/auth/FirebaseAuth";
-import { FaPlus, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaPlus, FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { Footer } from "@/components/Footer";
 import { Blob } from "@/components/Blob";
 // let sumOfCompleted = 0;
@@ -60,6 +60,7 @@ export default function Home() {
   const [filter, setFilter] = useState(false);
   const [buttonActive, setButtonActive] = useState(false);
   const toast = useToast();
+  const [cardOpen, setCardOpen] = useState(true);
 
   let buttonCol, buttonCol2, shadow, shadow2;
   if (buttonActive) {
@@ -212,6 +213,10 @@ export default function Home() {
     });
   };
 
+  const toggleCard = () => {
+    setCardOpen(!cardOpen);
+  };
+
   if (user) {
     return (
       <Box minH="90vh">
@@ -335,7 +340,6 @@ export default function Home() {
                 bg="white"
                 w={{ md: "sm", base: "95%" }}
                 display="flex"
-                h="sm"
                 boxShadow="base"
                 mx="4"
                 mt="10"
@@ -365,122 +369,131 @@ export default function Home() {
                       {user.name}
                     </Text>
                   </Box>
-                  <Button variant="ghost">
-                    <FaChevronLeft />
-                  </Button>
+                  {cardOpen ? (
+                    <Button variant="ghost" onClick={toggleCard}>
+                      <FaChevronUp />
+                    </Button>
+                  ) : (
+                    <Button variant="ghost" onClick={toggleCard}>
+                      <FaChevronDown />
+                    </Button>
+                  )}
                 </Box>
-                <Box h="90%" w="90%" mt="2">
-                  <Tooltip
-                    label="Хийсэн хэсэгт байгаа даалгаварууд"
-                    placement="top-start"
-                  >
-                    <Text
-                      fontWeight="light"
-                      alignItems="center"
-                      display="flex"
-                      justifyContent="space-between"
-                      mt="2"
+                {cardOpen && (
+                  <Box h="90%" w="90%" mt="2">
+                    <Tooltip
+                      label="Хийсэн хэсэгт байгаа даалгаварууд"
+                      placement="top-start"
                     >
-                      Хийсэн даалгавар:
                       <Text
-                        fontSize="lg"
-                        fontWeight="bold"
-                        pl="2"
-                        color="teal.500"
+                        fontWeight="light"
+                        alignItems="center"
+                        display="flex"
+                        justifyContent="space-between"
+                        mt="2"
                       >
-                        {t}
+                        Хийсэн даалгавар:
+                        <Text
+                          fontSize="lg"
+                          fontWeight="bold"
+                          pl="2"
+                          color="teal.500"
+                        >
+                          {t}
+                        </Text>
                       </Text>
-                    </Text>
-                  </Tooltip>
-                  <Tooltip
-                    label="Устсан болон устаагүй бүх цаг үеийн хийсэн даалгавар"
-                    placement="top-start"
-                  >
-                    <Text
-                      fontWeight="light"
-                      alignItems="center"
-                      display="flex"
-                      justifyContent="space-between"
-                      mt="2"
+                    </Tooltip>
+                    <Tooltip
+                      label="Устсан болон устаагүй бүх цаг үеийн хийсэн даалгавар"
+                      placement="top-start"
                     >
-                      Нийт хийсэн даалгавар:
                       <Text
-                        fontSize="lg"
-                        fontWeight="bold"
-                        pl="2"
-                        color="teal.500"
+                        fontWeight="light"
+                        alignItems="center"
+                        display="flex"
+                        justifyContent="space-between"
+                        mt="2"
                       >
-                        {sum}
+                        Нийт хийсэн даалгавар:
+                        <Text
+                          fontSize="lg"
+                          fontWeight="bold"
+                          pl="2"
+                          color="teal.500"
+                        >
+                          {sum}
+                        </Text>
                       </Text>
-                    </Text>
-                  </Tooltip>
-                  <Tooltip
-                    label="Даалгавар явуулсны дараа шинжлэгдэнэ"
-                    placement="top-start"
-                  >
-                    <Text
-                      fontWeight="light"
-                      alignItems="center"
-                      display="flex"
-                      justifyContent="space-between"
-                      mt="2"
+                    </Tooltip>
+                    <Tooltip
+                      label="Даалгавар явуулсны дараа шинжлэгдэнэ"
+                      placement="top-start"
                     >
-                      Сиси-гээр ирсэн:
                       <Text
-                        fontSize="lg"
-                        fontWeight="bold"
-                        pl="2"
-                        color="teal.500"
+                        fontWeight="light"
+                        alignItems="center"
+                        display="flex"
+                        justifyContent="space-between"
+                        mt="2"
                       >
-                        {sumOfSisi}
+                        Сиси-гээр ирсэн:
+                        <Text
+                          fontSize="lg"
+                          fontWeight="bold"
+                          pl="2"
+                          color="teal.500"
+                        >
+                          {sumOfSisi}
+                        </Text>
                       </Text>
-                    </Text>
-                  </Tooltip>
-                  <Tooltip
-                    label="Даалгавар явуулсны дараа шинжлэгдэнэ"
-                    placement="top-start"
-                  >
-                    <Text
-                      fontWeight="light"
-                      alignItems="center"
-                      display="flex"
-                      justifyContent="space-between"
-                      mt="2"
+                    </Tooltip>
+                    <Tooltip
+                      label="Даалгавар явуулсны дараа шинжлэгдэнэ"
+                      placement="top-start"
                     >
-                      Teams-гээр ирсэн:
                       <Text
-                        fontSize="lg"
-                        fontWeight="bold"
-                        pl="2"
-                        color="teal.500"
+                        fontWeight="light"
+                        alignItems="center"
+                        display="flex"
+                        justifyContent="space-between"
+                        mt="2"
                       >
-                        {sumOfTeams}
+                        Teams-гээр ирсэн:
+                        <Text
+                          fontSize="lg"
+                          fontWeight="bold"
+                          pl="2"
+                          color="teal.500"
+                        >
+                          {sumOfTeams}
+                        </Text>
                       </Text>
-                    </Text>
-                  </Tooltip>
-                  <Tooltip
-                    label="Даалгавар явуулсны дараа шинжлэгдэнэ"
-                    placement="top-start"
-                  >
-                    <Text
-                      fontWeight="light"
-                      alignItems="center"
-                      display="flex"
-                      justifyContent="space-between"
-                      mt="2"
+                    </Tooltip>
+                    <Tooltip
+                      label="Даалгавар явуулсны дараа шинжлэгдэнэ"
+                      placement="top-start"
                     >
-                      Бусад платформоор ирсэн:
                       <Text
-                        fontSize="lg"
-                        fontWeight="bold"
-                        pl="2"
-                        color="teal.500"
+                        fontWeight="light"
+                        alignItems="center"
+                        display="flex"
+                        justifyContent="space-between"
+                        mt="2"
+                        pb="5"
                       >
-                        {sumOfOther}
+                        Бусад платформоор ирсэн:
+                        <Text
+                          fontSize="lg"
+                          fontWeight="bold"
+                          pl="2"
+                          color="teal.500"
+                        >
+                          {sumOfOther}
+                        </Text>
                       </Text>
-                    </Text>
-                  </Tooltip>
-                </Box>
+                    </Tooltip>
+                  </Box>
+                )}
               </Box>
             </Box>
           </Box>
@@ -642,11 +655,11 @@ export default function Home() {
               />
               <Blob
                 color="teal.50"
-                w={"120%"}
-                h={"140%"}
+                w={"100%"}
+                h={"130%"}
                 position={"absolute"}
                 top={{ md: "-20%", base: "-10%" }}
-                right={{ md: 2.5, base: 0 }}
+                right={{ md: 3, base: 0 }}
                 zIndex={-1}
               />
             </SlideFade>
