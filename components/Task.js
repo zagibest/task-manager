@@ -67,17 +67,17 @@ export default function Task(props) {
     >
       <Box p="5" opacity={completed}>
         <Flex justifyContent="space-between">
-          <Text fontSize="xl" as="b">
+          <Text fontSize={{ md: "xl", base: "lg" }} as="b">
             {props.taskName}
           </Text>
           <Tooltip label={props.platformValue}>
-            <Circle bg={color} w="14" fontSize="smaller" h="10">
+            <Circle bg={color} w="12" fontSize="smaller" h="10">
               <Image src={imgSrc} display="inline" h={svgHeight} />
             </Circle>
           </Tooltip>
         </Flex>
         <Flex justifyContent="space-between" pt="5">
-          <Text fontSize="16">{props.taskDetail}</Text>
+          <Text fontSize={{ md: "16", base: "14" }}>{props.taskDetail}</Text>
         </Flex>
         <Divider py="2" />
         <Flex pt="5">
@@ -97,7 +97,11 @@ export default function Task(props) {
                 color: "white",
               }}
               onClick={() =>
-                props.toggleCompleted(props.taskId, props.completed)
+                props.toggleCompleted(
+                  props.taskId,
+                  props.completed,
+                  props.platformValue
+                )
               }
               color="blackAlpha.700"
             >

@@ -20,6 +20,7 @@ import {
   useToast,
   Image,
   SlideFade,
+  Tooltip,
 } from "@chakra-ui/react";
 import Task from "@/components/Task";
 import { useState, useEffect } from "react";
@@ -33,21 +34,29 @@ import {
   deleteDoc,
   updateDoc,
   orderBy,
+  setDoc,
 } from "firebase/firestore";
 import { Navbar } from "@/components/Navbar";
 import FirebaseAuth from "@/components/auth/FirebaseAuth";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Footer } from "@/components/Footer";
 import { Blob } from "@/components/Blob";
+// let sumOfCompleted = 0;
 
 export default function Home() {
   const { user, logout } = useUser();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isFormOpen,
+    onOpen: onFormOpen,
+    onClose: onFormClose,
+  } = useDisclosure();
+
   const [platformValue, setValue] = useState("1");
-  const [taskName, setTaskName] = useState();
-  const [taskDetail, setTaskDetail] = useState();
+  const [taskName, setTaskName] = useState("");
+  const [taskDetail, setTaskDetail] = useState("");
   const [startDate, setStartDate] = useState();
   const [data, setData] = useState();
+  const [stats, setStats] = useState();
   const [filter, setFilter] = useState(false);
   const [buttonActive, setButtonActive] = useState(false);
   const toast = useToast();
@@ -76,7 +85,8 @@ export default function Home() {
         taskDate: startDate,
         completed: false,
       });
-      onClose();
+
+      onFormClose();
       setStartDate("");
       setTaskName("");
       setTaskDetail("");
@@ -92,6 +102,7 @@ export default function Home() {
         collection(db, "admin", user?.id, "datas"),
         orderBy("taskDate")
       );
+      const q2 = query(collection(db, "admin", user?.id, "stats"));
 
       const unsub = onSnapshot(q, (querySnapshot) => {
         let tmpArray = [];
@@ -100,19 +111,57 @@ export default function Home() {
         });
         setData(tmpArray);
       });
+      const unsub2 = onSnapshot(q2, (querySnapshot) => {
+        let tmpArray = [];
+        querySnapshot.forEach((doc) => {
+          tmpArray.push({ ...doc.data(), id: doc.id });
+        });
+        setStats(tmpArray);
+      });
 
-      return () => unsub();
+      return () => {
+        unsub();
+        unsub2();
+      };
     }
   }, [user]);
+  let sum = 0,
+    statsId,
+    sumOfTeams = 0,
+    sumOfSisi = 0,
+    sumOfOther = 0;
+  stats?.map((item) => {
+    statsId = item.id;
+    sum = item.sumOfCompleted;
+    sumOfSisi = item.sumOfSisi;
+    sumOfTeams = item.sumOfTeams;
+    sumOfOther = item.sumOfOther;
+  });
 
   const deleteData = (taskId) => {
     deleteDoc(doc(db, "admin", user.id, "datas", taskId));
   };
 
-  const toggleCompleted = (taskId, completed) => {
+  const toggleCompleted = (taskId, completed, platformValue) => {
     updateDoc(doc(db, "admin", user.id, "datas", taskId), {
       completed: !completed,
     });
+    if (platformValue === "SISI") {
+      sumOfSisi++;
+    } else if (platformValue === "TEAMS") {
+      sumOfTeams++;
+    } else {
+      sumOfOther++;
+    }
+    if (!completed) {
+      sum++;
+      setDoc(doc(db, "admin", user.id, "stats", statsId), {
+        sumOfCompleted: sum,
+        sumOfSisi: sumOfSisi,
+        sumOfTeams: sumOfTeams,
+        sumOfOther: sumOfOther,
+      });
+    }
   };
   const t = 0,
     t2 = 0;
@@ -169,7 +218,7 @@ export default function Home() {
         <Box
           display="flex"
           flexDir="column"
-          alignItems="center"
+          // alignItems="center"
           minH="100vh"
           w="100%"
           bg="gray.50"
@@ -178,84 +227,249 @@ export default function Home() {
           <Navbar name={user.name} logout={() => logout()} photo={user.photo} />
           <Box
             display="flex"
-            flexDir="column"
-            w={{ md: "50%", base: "96%" }}
-            alignItems="center"
-            mt="10"
+            flexDir={{ md: "row-reverse", base: "column" }}
+            alignItems={{ base: "center", md: "normal" }}
+            justifyContent="center"
           >
-            <Box w={{ md: "lg", base: "95%" }} display="flex" mb="5">
-              <Button
-                color="white"
-                bg={buttonCol2}
-                flex="1"
-                onClick={() => {
-                  setFilter(false);
-                  setButtonActive(false);
-                }}
-                borderRadius="0"
-                borderLeftRadius="8"
-                _focus={{
-                  bg: { buttonCol2 },
-                }}
-                _hover={{
-                  bg: { buttonCol2 },
-                }}
-                boxShadow={shadow2}
-              >
-                Хийх:
-                <Text display="inline" fontWeight="bold" pl="1" fontSize="lg">
-                  {t2}
-                </Text>
-              </Button>
-              <Button
-                color="white"
-                bg={buttonCol}
-                borderRadius="5, 0"
-                flex="1"
-                onClick={() => {
-                  setFilter(true);
-                  setButtonActive(true);
-                }}
-                borderRightRadius="8"
-                _focus={{
-                  bg: { buttonCol },
-                }}
-                _hover={{
-                  bg: { buttonCol2 },
-                }}
-                boxShadow={shadow}
-              >
-                Хийсэн:
-                <Text display="inline" fontWeight="bold" pl="1" fontSize="lg">
-                  {t}
-                </Text>
-              </Button>
-            </Box>
-            <Box w={{ md: "lg", base: "95%" }} display="flex">
-              <Button
-                onClick={onOpen}
-                _hover={{
-                  bg: "teal.500",
-                  color: "white",
-                }}
-                leftIcon={<FaPlus />}
-                w="100%"
-              >
-                Даалгавар нэмэх
-              </Button>
-            </Box>
             <Box
-              mt="5"
-              w="100%"
               display="flex"
               flexDir="column"
+              flex="3"
+              // w={{ md: "50%", base: "96%" }}
+              w="96%"
               alignItems="center"
+              mt="10"
             >
-              {Cards}
+              <Box w={{ md: "lg", base: "95%" }} display="flex" mb="5">
+                <Button
+                  color="white"
+                  bg={buttonCol2}
+                  flex="1"
+                  onClick={() => {
+                    setFilter(false);
+                    setButtonActive(false);
+                  }}
+                  borderRadius="0"
+                  borderLeftRadius="8"
+                  _focus={{
+                    bg: { buttonCol2 },
+                  }}
+                  _hover={{
+                    bg: { buttonCol2 },
+                  }}
+                  boxShadow={shadow2}
+                  position="relative"
+                >
+                  Хийх:
+                  {t2 != 0 && (
+                    <Box
+                      position="absolute"
+                      top="-2"
+                      left="0"
+                      bg="pink.500"
+                      borderRadius="full"
+                      h="6"
+                      w="6"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Text display="inline" fontWeight="bold" fontSize="lg">
+                        {t2 != 0 && t2}
+                      </Text>
+                    </Box>
+                  )}
+                </Button>
+                <Button
+                  color="white"
+                  bg={buttonCol}
+                  borderRadius="5, 0"
+                  flex="1"
+                  onClick={() => {
+                    setFilter(true);
+                    setButtonActive(true);
+                  }}
+                  borderRightRadius="8"
+                  _focus={{
+                    bg: { buttonCol },
+                  }}
+                  _hover={{
+                    bg: { buttonCol2 },
+                  }}
+                  boxShadow={shadow}
+                >
+                  Хийсэн
+                </Button>
+              </Box>
+              <Box w={{ md: "lg", base: "95%" }} display="flex">
+                <Button
+                  onClick={onFormOpen}
+                  _hover={{
+                    bg: "teal.500",
+                    color: "white",
+                  }}
+                  leftIcon={<FaPlus />}
+                  w="100%"
+                >
+                  Даалгавар нэмэх
+                </Button>
+              </Box>
+              <Box
+                mt="5"
+                w="100%"
+                display="flex"
+                flexDir="column"
+                alignItems="center"
+              >
+                {Cards}
+              </Box>
+            </Box>
+            <Box
+              flex="2"
+              display="flex"
+              w="96%"
+              alignItems={{ base: "center", md: "flex-end" }}
+              flexDir="column"
+            >
+              <Box
+                bg="white"
+                w={{ md: "sm", base: "95%" }}
+                display="flex"
+                h="sm"
+                boxShadow="base"
+                mx="4"
+                mt="10"
+                borderRadius="10"
+                flexDir="column"
+                alignItems="center"
+              >
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  h="10vh"
+                  w="96%"
+                >
+                  <Box display="flex" p="4" alignItems="center" h="10vh">
+                    <Image
+                      src={user.photo}
+                      h="100%"
+                      mr="2"
+                      borderRadius="full"
+                    />
+                    <Text
+                      fontWeight="bold"
+                      fontSize={{ md: "lg", base: "md" }}
+                      ml="2"
+                    >
+                      {user.name}
+                    </Text>
+                  </Box>
+                  <Button variant="ghost">
+                    <FaChevronLeft />
+                  </Button>
+                </Box>
+                <Box h="90%" w="90%" mt="2">
+                  <Tooltip
+                    label="Хийсэн хэсэгт байгаа даалгаварууд"
+                    placement="auto-start"
+                  >
+                    <Text
+                      fontWeight="light"
+                      alignItems="center"
+                      display="flex"
+                      justifyContent="space-between"
+                      mt="2"
+                    >
+                      Хийсэн даалгавар:
+                      <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        pl="2"
+                        color="teal.500"
+                      >
+                        {t}
+                      </Text>
+                    </Text>
+                  </Tooltip>
+                  <Tooltip
+                    label="Устсан болон устаагүй бүх цаг үеийн хийсэн даалгавар"
+                    placement="auto-start"
+                  >
+                    <Text
+                      fontWeight="light"
+                      alignItems="center"
+                      display="flex"
+                      justifyContent="space-between"
+                      mt="2"
+                    >
+                      Нийт хийсэн даалгавар:
+                      <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        pl="2"
+                        color="teal.500"
+                      >
+                        {sum}
+                      </Text>
+                    </Text>
+                  </Tooltip>
+                  <Text
+                    fontWeight="light"
+                    alignItems="center"
+                    display="flex"
+                    justifyContent="space-between"
+                    mt="2"
+                  >
+                    Сиси-гээр ирсэн:
+                    <Text
+                      fontSize="lg"
+                      fontWeight="bold"
+                      pl="2"
+                      color="teal.500"
+                    >
+                      {sumOfSisi}
+                    </Text>
+                  </Text>
+                  <Text
+                    fontWeight="light"
+                    alignItems="center"
+                    display="flex"
+                    justifyContent="space-between"
+                    mt="2"
+                  >
+                    Teams-гээр ирсэн:
+                    <Text
+                      fontSize="lg"
+                      fontWeight="bold"
+                      pl="2"
+                      color="teal.500"
+                    >
+                      {sumOfTeams}
+                    </Text>
+                  </Text>
+                  <Text
+                    fontWeight="light"
+                    alignItems="center"
+                    display="flex"
+                    justifyContent="space-between"
+                    mt="2"
+                  >
+                    Бусад платформоор ирсэн:
+                    <Text
+                      fontSize="lg"
+                      fontWeight="bold"
+                      pl="2"
+                      color="teal.500"
+                    >
+                      {sumOfOther}
+                    </Text>
+                  </Text>
+                </Box>
+              </Box>
             </Box>
           </Box>
-          <Box></Box>
-          <Modal isOpen={isOpen} onClose={onClose}>
+          <Modal isOpen={isFormOpen} onClose={onFormClose}>
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>Даалгавар нэмэх</ModalHeader>
@@ -267,7 +481,7 @@ export default function Home() {
                 </FormControl>
 
                 <FormControl mt={4}>
-                  <FormLabel>Дэлгэрэнгүй (заавал биш)</FormLabel>
+                  <FormLabel>Дэлгэрэнгүй</FormLabel>
                   <Input
                     onChange={(data) => setTaskDetail(data.target.value)}
                   />
@@ -300,7 +514,7 @@ export default function Home() {
                 <Button colorScheme="teal" mr={3} onClick={sendData}>
                   Нэмэх
                 </Button>
-                <Button onClick={onClose}>Хаах</Button>
+                <Button onClick={onFormClose}>Хаах</Button>
               </ModalFooter>
             </ModalContent>
           </Modal>
