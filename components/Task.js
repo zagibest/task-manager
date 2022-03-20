@@ -77,7 +77,7 @@ export default function Task(props) {
           </Tooltip>
         </Flex>
         <Flex justifyContent="space-between" pt="5">
-          <Text fontSize={{ md: "16", base: "14" }}>{props.taskDetail}</Text>
+          <Text fontSize={{ md: "16", base: "16" }}>{props.taskDetail}</Text>
         </Flex>
         <Divider py="2" />
         <Flex pt="5">

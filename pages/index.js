@@ -372,7 +372,7 @@ export default function Home() {
                 <Box h="90%" w="90%" mt="2">
                   <Tooltip
                     label="Хийсэн хэсэгт байгаа даалгаварууд"
-                    placement="auto-start"
+                    placement="top-start"
                   >
                     <Text
                       fontWeight="light"
@@ -394,7 +394,7 @@ export default function Home() {
                   </Tooltip>
                   <Tooltip
                     label="Устсан болон устаагүй бүх цаг үеийн хийсэн даалгавар"
-                    placement="auto-start"
+                    placement="top-start"
                   >
                     <Text
                       fontWeight="light"
@@ -414,57 +414,72 @@ export default function Home() {
                       </Text>
                     </Text>
                   </Tooltip>
-                  <Text
-                    fontWeight="light"
-                    alignItems="center"
-                    display="flex"
-                    justifyContent="space-between"
-                    mt="2"
+                  <Tooltip
+                    label="Даалгавар явуулсны дараа шинжлэгдэнэ"
+                    placement="top-start"
                   >
-                    Сиси-гээр ирсэн:
                     <Text
-                      fontSize="lg"
-                      fontWeight="bold"
-                      pl="2"
-                      color="teal.500"
+                      fontWeight="light"
+                      alignItems="center"
+                      display="flex"
+                      justifyContent="space-between"
+                      mt="2"
                     >
-                      {sumOfSisi}
+                      Сиси-гээр ирсэн:
+                      <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        pl="2"
+                        color="teal.500"
+                      >
+                        {sumOfSisi}
+                      </Text>
                     </Text>
-                  </Text>
-                  <Text
-                    fontWeight="light"
-                    alignItems="center"
-                    display="flex"
-                    justifyContent="space-between"
-                    mt="2"
+                  </Tooltip>
+                  <Tooltip
+                    label="Даалгавар явуулсны дараа шинжлэгдэнэ"
+                    placement="top-start"
                   >
-                    Teams-гээр ирсэн:
                     <Text
-                      fontSize="lg"
-                      fontWeight="bold"
-                      pl="2"
-                      color="teal.500"
+                      fontWeight="light"
+                      alignItems="center"
+                      display="flex"
+                      justifyContent="space-between"
+                      mt="2"
                     >
-                      {sumOfTeams}
+                      Teams-гээр ирсэн:
+                      <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        pl="2"
+                        color="teal.500"
+                      >
+                        {sumOfTeams}
+                      </Text>
                     </Text>
-                  </Text>
-                  <Text
-                    fontWeight="light"
-                    alignItems="center"
-                    display="flex"
-                    justifyContent="space-between"
-                    mt="2"
+                  </Tooltip>
+                  <Tooltip
+                    label="Даалгавар явуулсны дараа шинжлэгдэнэ"
+                    placement="top-start"
                   >
-                    Бусад платформоор ирсэн:
                     <Text
-                      fontSize="lg"
-                      fontWeight="bold"
-                      pl="2"
-                      color="teal.500"
+                      fontWeight="light"
+                      alignItems="center"
+                      display="flex"
+                      justifyContent="space-between"
+                      mt="2"
                     >
-                      {sumOfOther}
+                      Бусад платформоор ирсэн:
+                      <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        pl="2"
+                        color="teal.500"
+                      >
+                        {sumOfOther}
+                      </Text>
                     </Text>
-                  </Text>
+                  </Tooltip>
                 </Box>
               </Box>
             </Box>
