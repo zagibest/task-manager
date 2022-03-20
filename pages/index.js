@@ -260,7 +260,7 @@ export default function Home() {
                   boxShadow={shadow2}
                   position="relative"
                 >
-                  Хийх:
+                  Хийх
                   {t2 != 0 && (
                     <Box
                       position="absolute"
