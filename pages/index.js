@@ -126,7 +126,7 @@ export default function Home() {
     }
   }, [user]);
   let sum = 0,
-    statsId,
+    statsId = "userStatsId",
     sumOfTeams = 0,
     sumOfSisi = 0,
     sumOfOther = 0;
