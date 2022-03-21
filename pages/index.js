@@ -341,16 +341,17 @@ export default function Home() {
                     display="flex"
                     flexDir="column"
                     alignItems="center"
-                    opacity=".7"
+                    opacity=".9"
                   >
-                    <Text fontWeight="md" fontSize="md" mb="5" color="teal.500">
+                    <Text
+                      fontWeight="light"
+                      fontSize="md"
+                      mb="5"
+                      color="teal.500"
+                    >
                       Хийх даалгавар байхгүй байна.
                     </Text>
-                    <Image
-                      src="./images/done-gif.gif"
-                      h="100%"
-                      borderRadius="10"
-                    />
+                    <Image src="./images/done.gif" h="100%" borderRadius="10" />
                   </Box>
                 )}
               </Box>
@@ -380,7 +381,7 @@ export default function Home() {
                   h="10vh"
                   w="96%"
                 >
-                  <Box display="flex" p="4" alignItems="center" h="10vh">
+                  <Box display="flex" p="4" alignItems="center" h="20">
                     <Image
                       src={user.photo}
                       h="100%"

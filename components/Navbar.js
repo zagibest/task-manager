@@ -3,7 +3,7 @@ import { Box, Button, Text, Image, Link } from "@chakra-ui/react";
 export const Navbar = (props) => {
   return (
     <Box
-      h="10vh"
+      h="20"
       display="flex"
       justifyContent="space-between"
       alignItems="center"
