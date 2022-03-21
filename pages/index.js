@@ -22,6 +22,7 @@ import {
   SlideFade,
   Tooltip,
   Spinner,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Task from "@/components/Task";
 import { useState, useEffect } from "react";
@@ -41,8 +42,7 @@ import { Navbar } from "@/components/Navbar";
 import FirebaseAuth from "@/components/auth/FirebaseAuth";
 import { FaPlus, FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { Footer } from "@/components/Footer";
-import { Blob } from "@/components/Blob";
-// let sumOfCompleted = 0;
+import { HomeNavbar } from "@/components/HomeNavbar";
 
 export default function Home() {
   const { user, logout } = useUser();
@@ -64,15 +64,23 @@ export default function Home() {
   const [cardOpen, setCardOpen] = useState(true);
   const [loading, setLoading] = useState(false);
 
+  //colors
+  const textColor = useColorModeValue("black", "whiteAlpha.900");
+  const bgColor = useColorModeValue("white", "blackAlpha.500");
+  const bgColorSigned = useColorModeValue("gray.50", "blackAlpha.200");
+  const textColorSigned = useColorModeValue("black", "whiteAlpha.900");
+  const bgColorCard = useColorModeValue("white", "gray.700");
+  const colorButton = useColorModeValue("gray.300", "gray.700");
+
   let buttonCol, buttonCol2, shadow, shadow2;
   if (buttonActive) {
     buttonCol = "teal.500";
-    buttonCol2 = "gray.300";
+    buttonCol2 = colorButton;
 
     shadow = "base";
     shadow2 = "none";
   } else {
-    buttonCol = "gray.300";
+    buttonCol = colorButton;
     buttonCol2 = "teal.500";
     shadow = "none";
     shadow2 = "base";
@@ -161,7 +169,7 @@ export default function Home() {
     } else {
       sumOfOther++;
     }
-    if (!completed) {
+    if (!completed && taskId != currentId) {
       sum++;
       setDoc(doc(db, "admin", user.id, "stats", statsId), {
         sumOfCompleted: sum,
@@ -233,7 +241,7 @@ export default function Home() {
           // alignItems="center"
           minH="100vh"
           w="100%"
-          bg="gray.50"
+          bg={bgColorSigned}
           pb="10"
         >
           <Navbar name={user.name} logout={() => logout()} photo={user.photo} />
@@ -242,6 +250,7 @@ export default function Home() {
             flexDir={{ md: "row-reverse", base: "column" }}
             alignItems={{ base: "center", md: "normal" }}
             justifyContent="center"
+            color={textColorSigned}
           >
             <Box
               display="flex"
@@ -254,7 +263,7 @@ export default function Home() {
             >
               <Box w={{ md: "lg", base: "95%" }} display="flex" mb="5">
                 <Button
-                  color="white"
+                  color="whiteAlpha.900"
                   bg={buttonCol2}
                   flex="1"
                   onClick={() => {
@@ -293,7 +302,7 @@ export default function Home() {
                   )}
                 </Button>
                 <Button
-                  color="white"
+                  color="whiteAlpha.900"
                   bg={buttonCol}
                   borderRadius="5, 0"
                   flex="1"
@@ -364,7 +373,7 @@ export default function Home() {
               flexDir="column"
             >
               <Box
-                bg="white"
+                bg={bgColorCard}
                 w={{ md: "sm", base: "95%" }}
                 display="flex"
                 boxShadow="base"
@@ -373,6 +382,7 @@ export default function Home() {
                 borderRadius="10"
                 flexDir="column"
                 alignItems="center"
+                color={textColorSigned}
               >
                 <Box
                   display="flex"
@@ -485,7 +495,7 @@ export default function Home() {
                         justifyContent="space-between"
                         mt="2"
                       >
-                        Teams-гээр ирсэн:
+                        Teams-ээр ирсэн:
                         <Text
                           fontSize="lg"
                           fontWeight="bold"
@@ -591,9 +601,11 @@ export default function Home() {
         minH="100vh"
         flexDir="column"
         w="100%"
-        color="black"
+        bg={bgColor}
+        color={textColor}
         overflow="hidden"
       >
+        <HomeNavbar />
         <Box
           display="flex"
           flexDir={{ md: "row", base: "column" }}
@@ -601,6 +613,7 @@ export default function Home() {
           textAlign="center"
           alignItems="center"
           my="5"
+          mt={{ md: "10", base: "20" }}
         >
           <Box
             flex="1"
@@ -619,7 +632,7 @@ export default function Home() {
                   mt={{ md: "-10", base: "10" }}
                   fontSize={{ md: "5xl", base: "4xl" }}
                   fontWeight="900"
-                  color="black"
+                  color={textColor}
                   fontFamily="heading"
                 >
                   БҮХ ДААЛГАВАР
@@ -685,15 +698,6 @@ export default function Home() {
                 src="./images/ip-mock.png"
                 w={{ md: "90%", base: "100%" }}
                 display={{ md: "none" }}
-              />
-              <Blob
-                color="teal.50"
-                w={"100%"}
-                h={"130%"}
-                position={"absolute"}
-                top={{ md: "-20%", base: "-10%" }}
-                right={{ md: 3, base: 0 }}
-                zIndex={-1}
               />
             </SlideFade>
           </Box>

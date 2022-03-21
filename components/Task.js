@@ -7,6 +7,7 @@ import {
   Divider,
   Image,
   Tooltip,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { FaCheck, FaTrash } from "react-icons/fa";
 export default function Task(props) {
@@ -55,15 +56,20 @@ export default function Task(props) {
     dayColor = "teal.500";
   }
 
+  //colors
+  const cardBg = useColorModeValue("white", "gray.700");
+  const cardText = useColorModeValue("black", "whiteAlpha.900");
+  const dateText = useColorModeValue("blackAlpha.700", "whiteAlpha.900");
+
   return (
     <Box
       boxShadow="base"
       borderRadius="lg"
       w={{ md: "lg", base: "95%" }}
       mb="5"
-      bg="white"
+      bg={cardBg}
       position="relative"
-      color="blackAlpha.900"
+      color={cardText}
     >
       <Box p="5" opacity={completed}>
         <Flex justifyContent="space-between">
@@ -82,14 +88,19 @@ export default function Task(props) {
         <Divider py="2" />
         <Flex pt="5">
           <Box flex="1" display="flex" alignItems="center">
-            <Text fontSize="sm" color="blackAlpha.700">
+            <Text fontSize="sm" color={dateText}>
               {props.date} •{" "}
               <Text color={dayColor} display="inline" fontWeight="semibold">
                 {Difference_In_Days}
               </Text>
             </Text>
           </Box>
-          <Box display="flex" flex="1" justifyContent="flex-end">
+          <Box
+            display="flex"
+            flex="1"
+            justifyContent="flex-end"
+            color={dateText}
+          >
             <Button
               mr="2"
               _hover={{
@@ -103,7 +114,6 @@ export default function Task(props) {
                   props.platformValue
                 )
               }
-              color="blackAlpha.700"
             >
               <FaCheck />
             </Button>
@@ -113,7 +123,6 @@ export default function Task(props) {
                 bg: "red.500",
                 color: "white",
               }}
-              color="blackAlpha.700"
             >
               <FaTrash />
             </Button>

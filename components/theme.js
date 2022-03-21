@@ -8,6 +8,11 @@ const breakpoints = createBreakpoints({
   xl: "80em",
 });
 
+const config = {
+  initialColorMode: "light",
+  useSystemColorMode: true,
+};
+
 const fonts = {
   heading: "Raleway",
   body: "Inter",
@@ -21,6 +26,7 @@ const theme = extendTheme({
   breakpoints,
   colors,
   fonts,
+  config,
 });
 
 export default theme;

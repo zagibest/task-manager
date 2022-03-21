@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 
-export const Navbar = (props) => {
+export const HomeNavbar = () => {
   const [darkMode, setDarkMode] = useState(false);
   const { toggleColorMode } = useColorMode();
 
@@ -17,17 +17,19 @@ export const Navbar = (props) => {
     setDarkMode(!darkMode);
   };
 
-  // const textColor = useColorModeValue("whiteAlpha.900", "black");
+  const textColor = useColorModeValue("black", "whiteAlpha.900");
+
   return (
     <Box
       h="20"
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      bg="teal.500"
-      color="whiteAlpha.900"
-      // color={textColor}
+      //   bg="teal.500"
+      color={textColor}
       w="100%"
+      position="absolute"
+      top="0"
     >
       <Box
         ml={{ md: "10", base: "5" }}
@@ -42,7 +44,7 @@ export const Navbar = (props) => {
         </Link>
       </Box>
 
-      <Box mr={{ md: "10", base: "5" }}>
+      <Box mr={{ md: "10", base: "5" }} color={textColor}>
         <Button mr={{ base: "2", md: "4" }} variant="outline">
           Ашиглах заавар
         </Button>
@@ -70,23 +72,7 @@ export const Navbar = (props) => {
           </Button>
         )}
 
-        <Button variant="outline" mr={{ base: "2", md: "4" }}>
-          🇺🇸
-        </Button>
-        <Button
-          onClick={props.logout}
-          mr={{ md: "10", base: "5" }}
-          color="white"
-          // border="2px"
-          variant="outline"
-          bg="transparent"
-          _hover={{
-            bg: "white",
-            color: "teal.500",
-          }}
-        >
-          Гарах
-        </Button>
+        <Button variant="outline">🇺🇸</Button>
       </Box>
     </Box>
   );
