@@ -103,19 +103,20 @@ export const Navbar = (props) => {
           variant="ghost"
           display={{ md: "none", base: "block" }}
           mr="2"
+          _focus={{ bg: "teal.500" }}
         >
           <FaBars />
         </MenuButton>
-        <MenuList bg={bgColor} color={textColor}>
-          <MenuItem>
-            <Button mr={{ base: "2", md: "4" }} variant="outline">
+        <MenuList color="whiteAlpha.900" bg="teal.500">
+          <MenuItem _focus={{ bg: "teal.500" }} _hover={{ bg: "teal.500" }}>
+            <Button variant="outline" w="100%">
               Ашиглах заавар
             </Button>
           </MenuItem>
           <MenuItem>
             {darkMode ? (
               <Button
-                mr={{ base: "2", md: "4" }}
+                w="100%"
                 variant="outline"
                 onClick={() => {
                   handleClick();
@@ -126,7 +127,7 @@ export const Navbar = (props) => {
               </Button>
             ) : (
               <Button
-                mr={{ base: "2", md: "4" }}
+                w="100%"
                 variant="outline"
                 onClick={() => {
                   handleClick();
@@ -138,7 +139,7 @@ export const Navbar = (props) => {
             )}
           </MenuItem>
           <MenuItem>
-            <Button variant="outline" mr={{ base: "2", md: "4" }}>
+            <Button variant="outline" w="100%">
               🇺🇸
             </Button>
           </MenuItem>
@@ -146,11 +147,9 @@ export const Navbar = (props) => {
             {" "}
             <Button
               onClick={props.logout}
-              mr={{ md: "10", base: "5" }}
-              color={textColor}
+              w="100%"
               // border="2px"
               variant="outline"
-              bg={bgColor}
               _hover={{
                 bg: "white",
                 color: "teal.500",
