@@ -9,11 +9,24 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaSun, FaMoon, FaBars } from "react-icons/fa";
+import { useRouter } from "next/router";
+
+import en from "../locales/en";
+import mn from "../locales/mn";
 
 export const Navbar = (props) => {
+  const router = useRouter();
+  const { locale } = router;
+  const language = locale === "mn" ? mn : en;
+
+  const changeLanguage = (e) => {
+    const locale = e.target.value;
+    router.push(router.pathname, router.asPath, { locale });
+  };
   const [darkMode, setDarkMode] = useState(false);
   const { toggleColorMode } = useColorMode();
 
@@ -48,54 +61,65 @@ export const Navbar = (props) => {
       </Box>
 
       <Box mr={{ md: "10", base: "5" }} display={{ base: "none", md: "block" }}>
-        <Button
-          mr={{ base: "2", md: "4" }}
-          variant="outline"
-          _hover={{ color: "teal.500", bg: "whiteAlpha.900" }}
-        >
-          Ашиглах заавар
-        </Button>
-        {darkMode ? (
+        <Box display="flex">
           <Button
             mr={{ base: "2", md: "4" }}
             variant="outline"
-            onClick={() => {
-              handleClick();
-              toggleColorMode();
-            }}
-          >
-            <FaSun />
-          </Button>
-        ) : (
-          <Button
-            mr={{ base: "2", md: "4" }}
-            variant="outline"
-            onClick={() => {
-              handleClick();
-              toggleColorMode();
-            }}
             _hover={{ color: "teal.500", bg: "whiteAlpha.900" }}
+            display="inline"
           >
-            <FaMoon />
+            {language.usageButtonText}
           </Button>
-        )}
-
-        <Button variant="outline" mr={{ base: "2", md: "4" }}>
-          🇺🇸
-        </Button>
-        <Button
-          onClick={props.logout}
-          mr={{ md: "10", base: "5" }}
-          // border="2px"
-          variant="outline"
-          _hover={{
-            bg: "white",
-            color: "teal.500",
-          }}
-          color="whiteAlpha.900"
-        >
-          Гарах
-        </Button>
+          {darkMode ? (
+            <Button
+              mr={{ base: "2", md: "4" }}
+              variant="outline"
+              onClick={() => {
+                handleClick();
+                toggleColorMode();
+              }}
+            >
+              <FaSun />
+            </Button>
+          ) : (
+            <Button
+              mr={{ base: "2", md: "4" }}
+              variant="outline"
+              onClick={() => {
+                handleClick();
+                toggleColorMode();
+              }}
+              _hover={{ color: "teal.500", bg: "whiteAlpha.900" }}
+            >
+              <FaMoon />
+            </Button>
+          )}
+          <Box>
+            <Select
+              onChange={changeLanguage}
+              defaultValue={locale}
+              mr={{ base: "2", md: "4" }}
+              // variant="outline"
+              w="16"
+            >
+              <option value="en">🇺🇸</option>
+              <option value="mn">🇲🇳</option>
+            </Select>
+          </Box>
+          <Button
+            onClick={props.logout}
+            mr={{ md: "10", base: "5" }}
+            // border="2px"
+            variant="outline"
+            _hover={{
+              bg: "white",
+              color: "teal.500",
+            }}
+            color="whiteAlpha.900"
+          >
+            Гарах
+          </Button>
+        </Box>
       </Box>
       <Menu>
         <MenuButton
