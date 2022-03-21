@@ -21,6 +21,7 @@ import {
   Image,
   SlideFade,
   Tooltip,
+  Spinner,
 } from "@chakra-ui/react";
 import Task from "@/components/Task";
 import { useState, useEffect } from "react";
@@ -61,6 +62,7 @@ export default function Home() {
   const [buttonActive, setButtonActive] = useState(false);
   const toast = useToast();
   const [cardOpen, setCardOpen] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   let buttonCol, buttonCol2, shadow, shadow2;
   if (buttonActive) {
@@ -78,6 +80,7 @@ export default function Home() {
 
   const sendData = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await addDoc(collection(db, "admin", user.id, "datas"), {
         taskName: taskName,
@@ -92,13 +95,16 @@ export default function Home() {
       setTaskName("");
       setTaskDetail("");
       showToast();
+      setLoading(false);
     } catch (error) {
       alert(error);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     if (user) {
+      setLoading(true);
       const q = query(
         collection(db, "admin", user?.id, "datas"),
         orderBy("taskDate")
@@ -111,6 +117,7 @@ export default function Home() {
           tmpArray.push({ ...doc.data(), id: doc.id });
         });
         setData(tmpArray);
+        setLoading(false);
       });
       const unsub2 = onSnapshot(q2, (querySnapshot) => {
         let tmpArray = [];
@@ -327,6 +334,7 @@ export default function Home() {
                 alignItems="center"
               >
                 {Cards}
+                {loading && <Spinner color="teal.500" thickness="5px" />}
               </Box>
             </Box>
             <Box
@@ -539,7 +547,13 @@ export default function Home() {
               </ModalBody>
 
               <ModalFooter>
-                <Button colorScheme="teal" mr={3} onClick={sendData}>
+                <Button
+                  colorScheme="teal"
+                  mr={3}
+                  onClick={sendData}
+                  isLoading={loading}
+                  loadingText="Нэмж байна"
+                >
                   Нэмэх
                 </Button>
                 <Button onClick={onFormClose}>Хаах</Button>
