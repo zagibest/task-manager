@@ -351,7 +351,11 @@ export default function Home() {
                     >
                       Хийх даалгавар байхгүй байна.
                     </Text>
-                    <Image src="./images/done.gif" h="100%" borderRadius="10" />
+                    <Image
+                      src="./images/donee.gif"
+                      h="100%"
+                      borderRadius="10"
+                    />
                   </Box>
                 )}
               </Box>
