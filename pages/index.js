@@ -335,6 +335,24 @@ export default function Home() {
               >
                 {Cards}
                 {loading && <Spinner color="teal.500" thickness="5px" />}
+                {t2 == 0 && !loading && sum != 0 && !filter && (
+                  <Box
+                    w={{ md: "lg", base: "95%" }}
+                    display="flex"
+                    flexDir="column"
+                    alignItems="center"
+                    opacity=".7"
+                  >
+                    <Text fontWeight="md" fontSize="md" mb="5" color="teal.500">
+                      Хийх даалгавар байхгүй байна.
+                    </Text>
+                    <Image
+                      src="./images/done-gif.gif"
+                      h="100%"
+                      borderRadius="10"
+                    />
+                  </Box>
+                )}
               </Box>
             </Box>
             <Box
@@ -655,7 +673,7 @@ export default function Home() {
               transition={{ enter: { duration: 0.4, delay: 0.7 } }}
             >
               <Image
-                src="./mac-mock.png"
+                src="./images/mac-mock.png"
                 w={{ md: "90%", base: "100%" }}
                 m="auto"
                 mt={{ md: 0, base: "10" }}
@@ -663,7 +681,7 @@ export default function Home() {
                 display={{ base: "none", md: "block" }}
               />
               <Image
-                src="./ip-mock.png"
+                src="./images/ip-mock.png"
                 w={{ md: "90%", base: "100%" }}
                 display={{ md: "none" }}
               />

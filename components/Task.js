@@ -13,15 +13,15 @@ export default function Task(props) {
   let color, imgSrc, svgHeight;
   if (props.platformValue === "SISI") {
     color = "blue.200";
-    imgSrc = "./sisi.svg";
+    imgSrc = "./images/sisi.svg";
     svgHeight = "5";
   } else if (props.platformValue === "TEAMS") {
     color = "purple.200";
-    imgSrc = "./teamz.svg";
+    imgSrc = "./images/teamz.svg";
     svgHeight = "6";
   } else {
     color = "gray.200";
-    imgSrc = "./book.svg";
+    imgSrc = "./images/book.svg";
     svgHeight = "5";
   }
 
