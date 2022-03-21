@@ -5,9 +5,13 @@ import {
   Link,
   useColorMode,
   useColorModeValue,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { FaSun, FaMoon } from "react-icons/fa";
+import { FaSun, FaMoon, FaBars } from "react-icons/fa";
 
 export const Navbar = (props) => {
   const [darkMode, setDarkMode] = useState(false);
@@ -17,7 +21,8 @@ export const Navbar = (props) => {
     setDarkMode(!darkMode);
   };
 
-  // const textColor = useColorModeValue("whiteAlpha.900", "black");
+  const textColor = useColorModeValue("gray.700", "whiteAlpha.900");
+  const bgColor = useColorModeValue("whiteAlpha.900", "gray.700");
   return (
     <Box
       h="20"
@@ -42,8 +47,12 @@ export const Navbar = (props) => {
         </Link>
       </Box>
 
-      <Box mr={{ md: "10", base: "5" }}>
-        <Button mr={{ base: "2", md: "4" }} variant="outline">
+      <Box mr={{ md: "10", base: "5" }} display={{ base: "none", md: "block" }}>
+        <Button
+          mr={{ base: "2", md: "4" }}
+          variant="outline"
+          _hover={{ color: "teal.500", bg: "whiteAlpha.900" }}
+        >
           Ашиглах заавар
         </Button>
         {darkMode ? (
@@ -65,6 +74,7 @@ export const Navbar = (props) => {
               handleClick();
               toggleColorMode();
             }}
+            _hover={{ color: "teal.500", bg: "whiteAlpha.900" }}
           >
             <FaMoon />
           </Button>
@@ -76,18 +86,81 @@ export const Navbar = (props) => {
         <Button
           onClick={props.logout}
           mr={{ md: "10", base: "5" }}
-          color="white"
           // border="2px"
           variant="outline"
-          bg="transparent"
           _hover={{
             bg: "white",
             color: "teal.500",
           }}
+          color="whiteAlpha.900"
         >
           Гарах
         </Button>
       </Box>
+      <Menu>
+        <MenuButton
+          as={Button}
+          variant="ghost"
+          display={{ md: "none", base: "block" }}
+          mr="2"
+        >
+          <FaBars />
+        </MenuButton>
+        <MenuList bg={bgColor} color={textColor}>
+          <MenuItem>
+            <Button mr={{ base: "2", md: "4" }} variant="outline">
+              Ашиглах заавар
+            </Button>
+          </MenuItem>
+          <MenuItem>
+            {darkMode ? (
+              <Button
+                mr={{ base: "2", md: "4" }}
+                variant="outline"
+                onClick={() => {
+                  handleClick();
+                  toggleColorMode();
+                }}
+              >
+                <FaSun />
+              </Button>
+            ) : (
+              <Button
+                mr={{ base: "2", md: "4" }}
+                variant="outline"
+                onClick={() => {
+                  handleClick();
+                  toggleColorMode();
+                }}
+              >
+                <FaMoon />
+              </Button>
+            )}
+          </MenuItem>
+          <MenuItem>
+            <Button variant="outline" mr={{ base: "2", md: "4" }}>
+              🇺🇸
+            </Button>
+          </MenuItem>
+          <MenuItem>
+            {" "}
+            <Button
+              onClick={props.logout}
+              mr={{ md: "10", base: "5" }}
+              color={textColor}
+              // border="2px"
+              variant="outline"
+              bg={bgColor}
+              _hover={{
+                bg: "white",
+                color: "teal.500",
+              }}
+            >
+              Гарах
+            </Button>
+          </MenuItem>
+        </MenuList>
+      </Menu>
     </Box>
   );
 };
