@@ -32,7 +32,7 @@ export const Footer = () => {
           color: "white",
         }}
       >
-        <Text fontSize="sm">Холбогдох</Text>
+        <Text fontSize="sm">Contact</Text>
       </Link>
     </Box>
   );

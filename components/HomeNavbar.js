@@ -5,13 +5,26 @@ import {
   Link,
   useColorMode,
   useColorModeValue,
+  Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
+import { useRouter } from "next/router";
+
+import en from "../locales/en";
+import mn from "../locales/mn";
 
 export const HomeNavbar = () => {
+  const router = useRouter();
+  const { locale } = router;
+  const language = locale === "mn" ? mn : en;
   const [darkMode, setDarkMode] = useState(false);
   const { toggleColorMode } = useColorMode();
+
+  const changeLanguage = (e) => {
+    const locale = e.target.value;
+    router.push(router.pathname, router.asPath, { locale });
+  };
 
   const handleClick = () => {
     setDarkMode(!darkMode);
@@ -44,9 +57,9 @@ export const HomeNavbar = () => {
         </Link>
       </Box>
 
-      <Box mr={{ md: "10", base: "5" }} color={textColor}>
+      <Box mr={{ md: "10", base: "5" }} color={textColor} display="flex">
         <Button mr={{ base: "2", md: "4" }} variant="outline">
-          Ашиглах заавар
+          {language.usageButtonText}
         </Button>
         {darkMode ? (
           <Button
@@ -72,7 +85,16 @@ export const HomeNavbar = () => {
           </Button>
         )}
 
-        <Button variant="outline">🇺🇸</Button>
+        <Select
+          onChange={changeLanguage}
+          defaultValue={locale}
+          mr={{ base: "2", md: "4" }}
+          // variant="outline"
+          w="16"
+        >
+          <option value="en">🇺🇸</option>
+          <option value="mn">🇲🇳</option>
+        </Select>
       </Box>
     </Box>
   );

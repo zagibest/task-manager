@@ -43,8 +43,15 @@ import FirebaseAuth from "@/components/auth/FirebaseAuth";
 import { FaPlus, FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { Footer } from "@/components/Footer";
 import { HomeNavbar } from "@/components/HomeNavbar";
+//language change
+import en from "../locales/en";
+import mn from "../locales/mn";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
+  const { locale } = router;
+  const language = locale === "mn" ? mn : en;
   const { user, logout } = useUser();
   const {
     isOpen: isFormOpen,
@@ -281,7 +288,7 @@ export default function Home() {
                   boxShadow={shadow2}
                   position="relative"
                 >
-                  Хийх
+                  {language.doButtonText}
                   {t2 != 0 && (
                     <Box
                       position="absolute"
@@ -319,7 +326,7 @@ export default function Home() {
                   }}
                   boxShadow={shadow}
                 >
-                  Хийсэн
+                  {language.doneButtonText}
                 </Button>
               </Box>
               <Box w={{ md: "lg", base: "95%" }} display="flex">
@@ -332,7 +339,7 @@ export default function Home() {
                   leftIcon={<FaPlus />}
                   w="100%"
                 >
-                  Даалгавар нэмэх
+                  {language.addAssignmentButton}
                 </Button>
               </Box>
               <Box
@@ -429,7 +436,7 @@ export default function Home() {
                         justifyContent="space-between"
                         mt="2"
                       >
-                        Хийсэн даалгавар:
+                        {language.doneText}
                         <Text
                           fontSize="lg"
                           fontWeight="bold"
@@ -451,7 +458,7 @@ export default function Home() {
                         justifyContent="space-between"
                         mt="2"
                       >
-                        Нийт хийсэн даалгавар:
+                        {language.allDoneText}
                         <Text
                           fontSize="lg"
                           fontWeight="bold"
@@ -473,7 +480,7 @@ export default function Home() {
                         justifyContent="space-between"
                         mt="2"
                       >
-                        Сиси-гээр ирсэн:
+                        {language.sisiAssignment}
                         <Text
                           fontSize="lg"
                           fontWeight="bold"
@@ -495,7 +502,7 @@ export default function Home() {
                         justifyContent="space-between"
                         mt="2"
                       >
-                        Teams-ээр ирсэн:
+                        {language.teamsAssignment}
                         <Text
                           fontSize="lg"
                           fontWeight="bold"
@@ -518,7 +525,7 @@ export default function Home() {
                         mt="2"
                         pb="5"
                       >
-                        Бусад платформоор ирсэн:
+                        {language.otherAssignment}
                         <Text
                           fontSize="lg"
                           fontWeight="bold"
@@ -537,16 +544,16 @@ export default function Home() {
           <Modal isOpen={isFormOpen} onClose={onFormClose}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Даалгавар нэмэх</ModalHeader>
+              <ModalHeader>{language.addAssignmentButton}</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
                 <FormControl isRequired>
-                  <FormLabel>Даалгавар нэр</FormLabel>
+                  <FormLabel>{language.taskName}</FormLabel>
                   <Input onChange={(data) => setTaskName(data.target.value)} />
                 </FormControl>
 
                 <FormControl mt={4}>
-                  <FormLabel>Дэлгэрэнгүй</FormLabel>
+                  <FormLabel>{language.taskDetail}</FormLabel>
                   <Input
                     onChange={(data) => setTaskDetail(data.target.value)}
                   />
@@ -559,11 +566,11 @@ export default function Home() {
                     <Radio value="TEAMS" pr="4">
                       Teams
                     </Radio>
-                    <Radio value="БУСАД">Бусад</Radio>
+                    <Radio value="БУСАД">{language.taskOther}</Radio>
                   </Box>
                 </RadioGroup>
                 <FormControl mt={4} isRequired>
-                  <FormLabel>Дуусах хугацаа</FormLabel>
+                  <FormLabel>{language.taskDate}</FormLabel>
                   <Box border="1px" borderColor="gray.300" borderRadius="md">
                     <Input
                       type="date"
@@ -583,9 +590,9 @@ export default function Home() {
                   isLoading={loading}
                   loadingText="Нэмж байна"
                 >
-                  Нэмэх
+                  {language.addText}
                 </Button>
-                <Button onClick={onFormClose}>Хаах</Button>
+                <Button onClick={onFormClose}>{language.closeText}</Button>
               </ModalFooter>
             </ModalContent>
           </Modal>
@@ -635,7 +642,7 @@ export default function Home() {
                   color={textColor}
                   fontFamily="heading"
                 >
-                  БҮХ ДААЛГАВАР
+                  {language.homeTop}
                 </Text>
               </SlideFade>
               <SlideFade
@@ -651,7 +658,7 @@ export default function Home() {
                   mt="-5"
                   fontFamily="heading"
                 >
-                  НЭГ ДОР
+                  {language.homeBottom}
                 </Text>
               </SlideFade>
             </Box>
@@ -666,8 +673,7 @@ export default function Home() {
                 transition={{ enter: { duration: 0.4, delay: 0.5 } }}
               >
                 <Text fontWeight="light" fontSize="lg" textAlign="center">
-                  Teams Sisi дээр зэрэг даалгавар орохоор мартчихаад байгаа биз
-                  😝. NUMO дээр даалгавараа тэмдэглээд амар тайван унтаарай!
+                  {language.homeDetail}
                 </Text>
               </SlideFade>
             </Box>

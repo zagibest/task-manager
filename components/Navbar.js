@@ -117,7 +117,7 @@ export const Navbar = (props) => {
             }}
             color="whiteAlpha.900"
           >
-            Гарах
+            {language.logOutButtonText}
           </Button>
         </Box>
       </Box>
@@ -134,7 +134,7 @@ export const Navbar = (props) => {
         <MenuList color="whiteAlpha.900" bg="teal.500">
           <MenuItem _focus={{ bg: "teal.500" }} _hover={{ bg: "teal.500" }}>
             <Button variant="outline" w="100%">
-              Ашиглах заавар
+              {language.usageButtonText}
             </Button>
           </MenuItem>
           <MenuItem>
@@ -163,9 +163,16 @@ export const Navbar = (props) => {
             )}
           </MenuItem>
           <MenuItem>
-            <Button variant="outline" w="100%">
-              🇺🇸
-            </Button>
+            <Select
+              onChange={changeLanguage}
+              defaultValue={locale}
+              // mr={{ base: "2", md: "4" }}
+              // variant="outline"
+              w="100%"
+            >
+              <option value="en">🇺🇸</option>
+              <option value="mn">🇲🇳</option>
+            </Select>
           </MenuItem>
           <MenuItem>
             {" "}
@@ -179,7 +186,7 @@ export const Navbar = (props) => {
                 color: "teal.500",
               }}
             >
-              Гарах
+              {language.logOutButtonText}
             </Button>
           </MenuItem>
         </MenuList>
