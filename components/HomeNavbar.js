@@ -1,3 +1,4 @@
+//chakra ui
 import {
   Box,
   Button,
@@ -6,10 +7,13 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+//react hooks
 import { useState } from "react";
+//icons
 import { FaSun, FaMoon } from "react-icons/fa";
+//next router
 import { useRouter } from "next/router";
-
+//language imports
 import en from "../locales/en";
 import mn from "../locales/mn";
 
@@ -68,8 +72,17 @@ export const HomeNavbar = () => {
         </Link>
       </Box>
 
-      <Box mr={{ md: "10", base: "5" }} color={textColor} display="flex">
-        <Button mr={{ base: "2", md: "4" }} variant="outline">
+      <Box
+        mr={{ md: "10", base: "5" }}
+        color={textColor}
+        display="flex"
+        alignItems="center"
+      >
+        <Button
+          mr={{ base: "2", md: "4" }}
+          variant="outline"
+          _focus={{ bg: "teal.500" }}
+        >
           {language.usageButtonText}
         </Button>
         {darkMode ? (
@@ -80,6 +93,7 @@ export const HomeNavbar = () => {
               handleClick();
               toggleColorMode();
             }}
+            _focus={{ bg: "teal.500" }}
           >
             <FaSun />
           </Button>
@@ -91,6 +105,7 @@ export const HomeNavbar = () => {
               handleClick();
               toggleColorMode();
             }}
+            _focus={{ bg: "teal.500" }}
           >
             <FaMoon />
           </Button>
@@ -101,6 +116,7 @@ export const HomeNavbar = () => {
             onClick={changeLangMob}
             mr={{ base: "2", md: "4" }}
             variant="outline"
+            _focus={{ bg: "teal.500" }}
           >
             🇺🇸
           </Button>
@@ -109,6 +125,7 @@ export const HomeNavbar = () => {
             onClick={changeLangMob}
             mr={{ base: "2", md: "4" }}
             variant="outline"
+            _focus={{ bg: "teal.500" }}
           >
             🇲🇳
           </Button>

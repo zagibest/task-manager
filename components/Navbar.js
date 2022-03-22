@@ -1,3 +1,4 @@
+//chakra ui
 import {
   Box,
   Button,
@@ -9,10 +10,13 @@ import {
   MenuList,
   MenuItem,
 } from "@chakra-ui/react";
+//react hooks
 import { useState } from "react";
+//icons
 import { FaSun, FaMoon, FaBars } from "react-icons/fa";
+//router
 import { useRouter } from "next/router";
-
+//language imports
 import en from "../locales/en";
 import mn from "../locales/mn";
 
@@ -72,6 +76,7 @@ export const Navbar = (props) => {
             variant="outline"
             _hover={{ color: "teal.500", bg: "whiteAlpha.900" }}
             display="inline"
+            _focus={{ bg: "teal.500" }}
           >
             {language.usageButtonText}
           </Button>
@@ -83,6 +88,8 @@ export const Navbar = (props) => {
                 handleClick();
                 toggleColorMode();
               }}
+              _focus={{ bg: "teal.500" }}
+              _hover={{ color: "teal.500", bg: "whiteAlpha.900" }}
             >
               <FaSun />
             </Button>
@@ -95,6 +102,7 @@ export const Navbar = (props) => {
                 toggleColorMode();
               }}
               _hover={{ color: "teal.500", bg: "whiteAlpha.900" }}
+              _focus={{ bg: "teal.500" }}
             >
               <FaMoon />
             </Button>
@@ -105,6 +113,7 @@ export const Navbar = (props) => {
                 onClick={changeLangMob}
                 mr={{ base: "2", md: "4" }}
                 variant="outline"
+                _focus={{ bg: "teal.500" }}
               >
                 🇺🇸
               </Button>
@@ -113,6 +122,7 @@ export const Navbar = (props) => {
                 onClick={changeLangMob}
                 mr={{ base: "2", md: "4" }}
                 variant="outline"
+                _focus={{ bg: "teal.500" }}
               >
                 🇲🇳
               </Button>
@@ -128,6 +138,7 @@ export const Navbar = (props) => {
               color: "teal.500",
             }}
             color="whiteAlpha.900"
+            _focus={{ bg: "teal.500" }}
           >
             {language.logOutButtonText}
           </Button>
@@ -138,10 +149,10 @@ export const Navbar = (props) => {
           as={Button}
           variant="outline"
           display={{ md: "none", base: "block" }}
-          mr="2"
+          mr="4"
           _focus={{ bg: "teal.500" }}
           _hover={{ bg: "teal.500" }}
-          fontSize="xl"
+          fontSize="lg"
         >
           <FaBars />
         </MenuButton>

@@ -1,4 +1,4 @@
-import { useUser } from "@/lib/firebase/useUser";
+//chakra ui
 import {
   Box,
   Flex,
@@ -24,8 +24,8 @@ import {
   Spinner,
   useColorModeValue,
 } from "@chakra-ui/react";
-import Task from "@/components/Task";
 import { useState, useEffect } from "react";
+//firebase
 import { db } from "@/lib/firebase/initFirebase";
 import {
   addDoc,
@@ -38,15 +38,20 @@ import {
   orderBy,
   setDoc,
 } from "firebase/firestore";
+//components
+import Task from "@/components/Task";
 import { Navbar } from "@/components/Navbar";
 import FirebaseAuth from "@/components/auth/FirebaseAuth";
-import { FaPlus, FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { Footer } from "@/components/Footer";
 import { HomeNavbar } from "@/components/HomeNavbar";
-
+//icons
+import { FaPlus, FaChevronUp, FaChevronDown } from "react-icons/fa";
+//language change imports
 import en from "../locales/en";
 import mn from "../locales/mn";
 import { useRouter } from "next/router";
+//user
+import { useUser } from "@/lib/firebase/useUser";
 
 export default function Home() {
   //language change
@@ -82,7 +87,6 @@ export default function Home() {
   const textColorSigned = useColorModeValue("black", "whiteAlpha.900");
   const bgColorCard = useColorModeValue("white", "gray.700");
   const colorButton = useColorModeValue("gray.300", "gray.700");
-
   let buttonCol, buttonCol2, shadow, shadow2;
   if (buttonActive) {
     buttonCol = "teal.500";
