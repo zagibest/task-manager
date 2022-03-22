@@ -10,6 +10,8 @@ import {
   MenuList,
   MenuItem,
   Select,
+  RadioGroup,
+  Radio,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaSun, FaMoon, FaBars } from "react-icons/fa";
@@ -22,11 +24,19 @@ export const Navbar = (props) => {
   const router = useRouter();
   const { locale } = router;
   const language = locale === "mn" ? mn : en;
+  const [lang, setLang] = useState(false);
 
-  const changeLanguage = (e) => {
-    const locale = e.target.value;
+  const changeLangMob = () => {
+    setLang(!lang);
+
+    if (lang) {
+      locale = "en";
+    } else {
+      locale = "mn";
+    }
     router.push(router.pathname, router.asPath, { locale });
   };
+
   const [darkMode, setDarkMode] = useState(false);
   const { toggleColorMode } = useColorMode();
 
@@ -95,16 +105,23 @@ export const Navbar = (props) => {
             </Button>
           )}
           <Box>
-            <Select
-              onChange={changeLanguage}
-              defaultValue={locale}
-              mr={{ base: "2", md: "4" }}
-              // variant="outline"
-              w="16"
-            >
-              <option value="en">🇺🇸</option>
-              <option value="mn">🇲🇳</option>
-            </Select>
+            {lang ? (
+              <Button
+                onClick={changeLangMob}
+                mr={{ base: "2", md: "4" }}
+                variant="outline"
+              >
+                🇺🇸
+              </Button>
+            ) : (
+              <Button
+                onClick={changeLangMob}
+                mr={{ base: "2", md: "4" }}
+                variant="outline"
+              >
+                🇲🇳
+              </Button>
+            )}
           </Box>
           <Button
             onClick={props.logout}
@@ -121,13 +138,15 @@ export const Navbar = (props) => {
           </Button>
         </Box>
       </Box>
-      <Menu>
+      <Menu closeOnSelect={false}>
         <MenuButton
           as={Button}
           variant="ghost"
           display={{ md: "none", base: "block" }}
           mr="2"
           _focus={{ bg: "teal.500" }}
+          _hover={{ bg: "teal.500" }}
+          fontSize="xl"
         >
           <FaBars />
         </MenuButton>
@@ -137,7 +156,7 @@ export const Navbar = (props) => {
               {language.usageButtonText}
             </Button>
           </MenuItem>
-          <MenuItem>
+          <MenuItem _focus={{ bg: "teal.500" }} _hover={{ bg: "teal.500" }}>
             {darkMode ? (
               <Button
                 w="100%"
@@ -162,19 +181,22 @@ export const Navbar = (props) => {
               </Button>
             )}
           </MenuItem>
-          <MenuItem>
-            <Select
-              onChange={changeLanguage}
-              defaultValue={locale}
-              // mr={{ base: "2", md: "4" }}
-              // variant="outline"
-              w="100%"
-            >
-              <option value="en">🇺🇸</option>
-              <option value="mn">🇲🇳</option>
-            </Select>
+          <MenuItem
+            _focus={{ bg: "teal.500" }}
+            _hover={{ bg: "teal.500" }}
+            closeOnSelect={false}
+          >
+            {lang ? (
+              <Button onClick={changeLangMob} w="100%" variant="outline">
+                🇺🇸
+              </Button>
+            ) : (
+              <Button onClick={changeLangMob} w="100%" variant="outline">
+                🇲🇳
+              </Button>
+            )}
           </MenuItem>
-          <MenuItem>
+          <MenuItem _focus={{ bg: "teal.500" }} _hover={{ bg: "teal.500" }}>
             {" "}
             <Button
               onClick={props.logout}

@@ -15,6 +15,7 @@ import en from "../locales/en";
 import mn from "../locales/mn";
 
 export const HomeNavbar = () => {
+  const [lang, setLang] = useState(false);
   const router = useRouter();
   const { locale } = router;
   const language = locale === "mn" ? mn : en;
@@ -28,6 +29,17 @@ export const HomeNavbar = () => {
 
   const handleClick = () => {
     setDarkMode(!darkMode);
+  };
+
+  const changeLangMob = () => {
+    setLang(!lang);
+
+    if (lang) {
+      locale = "en";
+    } else {
+      locale = "mn";
+    }
+    router.push(router.pathname, router.asPath, { locale });
   };
 
   const textColor = useColorModeValue("black", "whiteAlpha.900");
@@ -85,16 +97,23 @@ export const HomeNavbar = () => {
           </Button>
         )}
 
-        <Select
-          onChange={changeLanguage}
-          defaultValue={locale}
-          mr={{ base: "2", md: "4" }}
-          // variant="outline"
-          w="16"
-        >
-          <option value="en">🇺🇸</option>
-          <option value="mn">🇲🇳</option>
-        </Select>
+        {lang ? (
+          <Button
+            onClick={changeLangMob}
+            mr={{ base: "2", md: "4" }}
+            variant="outline"
+          >
+            🇺🇸
+          </Button>
+        ) : (
+          <Button
+            onClick={changeLangMob}
+            mr={{ base: "2", md: "4" }}
+            variant="outline"
+          >
+            🇲🇳
+          </Button>
+        )}
       </Box>
     </Box>
   );

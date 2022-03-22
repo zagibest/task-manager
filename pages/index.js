@@ -651,11 +651,11 @@ export default function Home() {
                 transition={{ enter: { duration: 0.4, delay: 0.5 } }}
               >
                 <Text
-                  fontSize={{ md: "7xl", base: "6xl" }}
+                  fontSize={{ md: "7xl", base: "5xl" }}
                   fontWeight="900"
                   bgGradient="linear(to-l, teal.400, teal.500)"
                   bgClip="text"
-                  mt="-5"
+                  // mt="-5"
                   fontFamily="heading"
                 >
                   {language.homeBottom}
