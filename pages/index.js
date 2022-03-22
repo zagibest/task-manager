@@ -185,7 +185,7 @@ export default function Home() {
     } else {
       sumOfOther++;
     }
-    if (!completed && taskId != currentId) {
+    if (!completed) {
       sum++;
       setDoc(doc(db, "admin", user.id, "stats", statsId), {
         sumOfCompleted: sum,
@@ -379,7 +379,7 @@ export default function Home() {
                       mb="5"
                       color="teal.500"
                     >
-                      Хийх даалгавар байхгүй байна.
+                      {language.noMoreAssignments}
                     </Text>
                     <Image src="./images/new.gif" h="100%" borderRadius="10" />
                   </Box>

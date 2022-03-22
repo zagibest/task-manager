@@ -24,4 +24,5 @@ export default {
   tomorrow: "Tomorrow",
   daysLeft: "days",
   deadlineIsMet: "Deadline exceeded",
+  noMoreAssignments: "No more assignments left",
 };

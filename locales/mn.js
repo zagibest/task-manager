@@ -24,4 +24,5 @@ export default {
   tomorrow: "Маргааш",
   daysLeft: "хоног",
   deadlineIsMet: "Хугацаа дууссан",
+  noMoreAssignments: "Хийх даалгавар байхгүй байна",
 };
