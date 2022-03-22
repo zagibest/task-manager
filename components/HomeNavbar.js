@@ -5,7 +5,6 @@ import {
   Link,
   useColorMode,
   useColorModeValue,
-  Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";

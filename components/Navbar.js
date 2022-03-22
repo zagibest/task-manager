@@ -4,14 +4,10 @@ import {
   Text,
   Link,
   useColorMode,
-  useColorModeValue,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  Select,
-  RadioGroup,
-  Radio,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaSun, FaMoon, FaBars } from "react-icons/fa";
@@ -26,9 +22,9 @@ export const Navbar = (props) => {
   const language = locale === "mn" ? mn : en;
   const [lang, setLang] = useState(false);
 
+  //changing language function
   const changeLangMob = () => {
     setLang(!lang);
-
     if (lang) {
       locale = "en";
     } else {
@@ -40,12 +36,11 @@ export const Navbar = (props) => {
   const [darkMode, setDarkMode] = useState(false);
   const { toggleColorMode } = useColorMode();
 
+  //changing color mode function
   const handleClick = () => {
     setDarkMode(!darkMode);
   };
 
-  const textColor = useColorModeValue("gray.700", "whiteAlpha.900");
-  const bgColor = useColorModeValue("whiteAlpha.900", "gray.700");
   return (
     <Box
       h="20"
@@ -141,7 +136,7 @@ export const Navbar = (props) => {
       <Menu closeOnSelect={false}>
         <MenuButton
           as={Button}
-          variant="ghost"
+          variant="outline"
           display={{ md: "none", base: "block" }}
           mr="2"
           _focus={{ bg: "teal.500" }}

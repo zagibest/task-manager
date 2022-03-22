@@ -43,15 +43,18 @@ import FirebaseAuth from "@/components/auth/FirebaseAuth";
 import { FaPlus, FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { Footer } from "@/components/Footer";
 import { HomeNavbar } from "@/components/HomeNavbar";
-//language change
+
 import en from "../locales/en";
 import mn from "../locales/mn";
 import { useRouter } from "next/router";
 
 export default function Home() {
+  //language change
   const router = useRouter();
   const { locale } = router;
   const language = locale === "mn" ? mn : en;
+
+  //user log in data
   const { user, logout } = useUser();
   const {
     isOpen: isFormOpen,
@@ -59,6 +62,7 @@ export default function Home() {
     onClose: onFormClose,
   } = useDisclosure();
 
+  //form data
   const [platformValue, setValue] = useState("1");
   const [taskName, setTaskName] = useState("");
   const [taskDetail, setTaskDetail] = useState("");
@@ -83,7 +87,6 @@ export default function Home() {
   if (buttonActive) {
     buttonCol = "teal.500";
     buttonCol2 = colorButton;
-
     shadow = "base";
     shadow2 = "none";
   } else {
@@ -93,6 +96,7 @@ export default function Home() {
     shadow2 = "base";
   }
 
+  //sending data to firestore
   const sendData = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -117,6 +121,7 @@ export default function Home() {
     }
   };
 
+  //recieving data from firestore
   useEffect(() => {
     if (user) {
       setLoading(true);
@@ -148,6 +153,8 @@ export default function Home() {
       };
     }
   }, [user]);
+
+  //calculating statistics
   let sum = 0,
     statsId = "userStatsId",
     sumOfTeams = 0,
@@ -161,10 +168,12 @@ export default function Home() {
     sumOfOther = item.sumOfOther;
   });
 
+  //deleting data from firestore
   const deleteData = (taskId) => {
     deleteDoc(doc(db, "admin", user.id, "datas", taskId));
   };
 
+  //marking assignment as finished
   const toggleCompleted = (taskId, completed, platformValue) => {
     updateDoc(doc(db, "admin", user.id, "datas", taskId), {
       completed: !completed,
@@ -186,6 +195,8 @@ export default function Home() {
       });
     }
   };
+
+  //to-do, done button logic
   const t = 0,
     t2 = 0;
   const Cards = data?.map((item) => {
@@ -225,6 +236,7 @@ export default function Home() {
     }
   });
 
+  //success toast after sending data
   const showToast = () => {
     toast({
       title: "Амжилттай",
@@ -235,10 +247,12 @@ export default function Home() {
     });
   };
 
+  //statistic card toggle
   const toggleCard = () => {
     setCardOpen(!cardOpen);
   };
 
+  //if user is logged in showing dashboard
   if (user) {
     return (
       <Box minH="90vh">
@@ -600,7 +614,9 @@ export default function Home() {
         <Footer />
       </Box>
     );
-  } else
+  }
+  //if user is not logged in showing log in/home page
+  else
     return (
       <Flex
         alignItems="center"

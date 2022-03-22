@@ -20,4 +20,8 @@ export default {
   taskDate: "Дуусах хугацаа",
   addText: "Нэмэх",
   closeText: "Хаах",
+  today: "Өнөөдөр",
+  tomorrow: "Маргааш",
+  daysLeft: "хоног",
+  deadlineIsMet: "Хугацаа дууссан",
 };

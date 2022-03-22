@@ -10,7 +10,18 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaCheck, FaTrash } from "react-icons/fa";
+import { useRouter } from "next/router";
+
+import en from "../locales/en";
+import mn from "../locales/mn";
+
 export default function Task(props) {
+  //language
+  const router = useRouter();
+  const { locale } = router;
+  const language = locale === "mn" ? mn : en;
+
+  //changing properties based on its platform value
   let color, imgSrc, svgHeight;
   if (props.platformValue === "SISI") {
     color = "blue.200";
@@ -26,6 +37,7 @@ export default function Task(props) {
     svgHeight = "5";
   }
 
+  //reducing opacity if task is completed
   let completed;
   if (props.completed) {
     completed = 0.7;
@@ -33,6 +45,7 @@ export default function Task(props) {
     completed = 1;
   }
 
+  //calculating days left
   var date2 = new Date(props.date);
   var date1 = new Date();
   let dayColor;
@@ -43,16 +56,16 @@ export default function Task(props) {
     Math.floor(Difference_In_Time / (1000 * 3600 * 24)) + 1;
 
   if (Difference_In_Days < 0) {
-    Difference_In_Days = "Хугацаа дууссан";
+    Difference_In_Days = language.deadlineIsMet;
     dayColor = "red.500";
   } else if (Difference_In_Days == 0) {
-    Difference_In_Days = "Өнөөдөр";
+    Difference_In_Days = language.today;
     dayColor = "teal.500";
   } else if (Difference_In_Days == 1) {
-    Difference_In_Days = "Маргааш";
+    Difference_In_Days = language.tomorrow;
     dayColor = "teal.500";
   } else {
-    Difference_In_Days = Difference_In_Days + " хоног";
+    Difference_In_Days = Difference_In_Days + " " + language.daysLeft;
     dayColor = "teal.500";
   }
 

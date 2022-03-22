@@ -20,4 +20,8 @@ export default {
   taskDate: "Deadline",
   addText: "Add",
   closeText: "Close",
+  today: "Today",
+  tomorrow: "Tomorrow",
+  daysLeft: "days",
+  deadlineIsMet: "Deadline exceeded",
 };
