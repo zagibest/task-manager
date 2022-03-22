@@ -17,12 +17,21 @@ import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
 import theme from "@/components/theme";
+import { useRouter } from "next/router";
+
+import en from "../locales/en";
+import mn from "../locales/mn";
 
 function MyApp({ Component, pageProps }) {
+  //language
+  const router = useRouter();
+  const { locale } = router;
+  const language = locale === "mn" ? mn : en;
+
   return (
     <ChakraProvider resetCSS theme={theme}>
       <Head>
-        <title>NUMO</title>
+        <title>NUMO - {language.title}</title>
         <link rel="manifest" href="./site.webmanifest"></link>
         <link
           rel="apple-touch-icon"
@@ -46,6 +55,7 @@ function MyApp({ Component, pageProps }) {
           name="viewport"
           content="initial-scale=1, viewport-fit=cover, user-scalable=no"
         ></meta>
+        <meta name="description" content="Даалгавар төлөвлөх апп, платформ" />
       </Head>
       <Component {...pageProps} />
     </ChakraProvider>

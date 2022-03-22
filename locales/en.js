@@ -25,4 +25,5 @@ export default {
   daysLeft: "days",
   deadlineIsMet: "Deadline exceeded",
   noMoreAssignments: "No more assignments left",
+  title: "Assignment planner",
 };

@@ -25,4 +25,5 @@ export default {
   daysLeft: "хоног",
   deadlineIsMet: "Хугацаа дууссан",
   noMoreAssignments: "Хийх даалгавар байхгүй байна",
+  title: "Даалгавар төлөвлөгч",
 };
