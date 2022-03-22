@@ -20,22 +20,15 @@ import { useRouter } from "next/router";
 import en from "../locales/en";
 import mn from "../locales/mn";
 
+import { languageChanger } from "./languageChanger";
+
 export const Navbar = (props) => {
   const router = useRouter();
-  const { locale } = router;
-  const language = locale === "mn" ? mn : en;
-  const [lang, setLang] = useState(false);
+  // const { locale } = router;
+  const language = mn;
+  // const [lang, setLang] = useState(false);
 
   //changing language function
-  const changeLangMob = () => {
-    setLang(!lang);
-    if (lang) {
-      locale = "en";
-    } else {
-      locale = "mn";
-    }
-    router.push(router.pathname, router.asPath, { locale });
-  };
 
   const [darkMode, setDarkMode] = useState(false);
   const { toggleColorMode } = useColorMode();
@@ -107,27 +100,6 @@ export const Navbar = (props) => {
               <FaMoon />
             </Button>
           )}
-          <Box>
-            {lang ? (
-              <Button
-                onClick={changeLangMob}
-                mr={{ base: "2", md: "4" }}
-                variant="outline"
-                _focus={{ bg: "teal.500" }}
-              >
-                🇺🇸
-              </Button>
-            ) : (
-              <Button
-                onClick={changeLangMob}
-                mr={{ base: "2", md: "4" }}
-                variant="outline"
-                _focus={{ bg: "teal.500" }}
-              >
-                🇲🇳
-              </Button>
-            )}
-          </Box>
           <Button
             onClick={props.logout}
             mr={{ md: "10", base: "5" }}
@@ -144,15 +116,15 @@ export const Navbar = (props) => {
           </Button>
         </Box>
       </Box>
-      <Menu closeOnSelect={false}>
+      <Menu>
         <MenuButton
           as={Button}
           variant="outline"
           display={{ md: "none", base: "block" }}
-          mr="4"
           _focus={{ bg: "teal.500" }}
           _hover={{ bg: "teal.500" }}
           fontSize="lg"
+          mr="4"
         >
           <FaBars />
         </MenuButton>
@@ -187,23 +159,7 @@ export const Navbar = (props) => {
               </Button>
             )}
           </MenuItem>
-          <MenuItem
-            _focus={{ bg: "teal.500" }}
-            _hover={{ bg: "teal.500" }}
-            closeOnSelect={false}
-          >
-            {lang ? (
-              <Button onClick={changeLangMob} w="100%" variant="outline">
-                🇺🇸
-              </Button>
-            ) : (
-              <Button onClick={changeLangMob} w="100%" variant="outline">
-                🇲🇳
-              </Button>
-            )}
-          </MenuItem>
           <MenuItem _focus={{ bg: "teal.500" }} _hover={{ bg: "teal.500" }}>
-            {" "}
             <Button
               onClick={props.logout}
               w="100%"

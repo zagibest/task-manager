@@ -77,7 +77,7 @@ export default function Home() {
   const [filter, setFilter] = useState(false);
   const [buttonActive, setButtonActive] = useState(false);
   const toast = useToast();
-  const [cardOpen, setCardOpen] = useState(true);
+  const [cardOpen, setCardOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   //colors

@@ -18,31 +18,14 @@ import en from "../locales/en";
 import mn from "../locales/mn";
 
 export const HomeNavbar = () => {
-  const [lang, setLang] = useState(false);
   const router = useRouter();
   const { locale } = router;
-  const language = locale === "mn" ? mn : en;
+  const language = mn;
   const [darkMode, setDarkMode] = useState(false);
   const { toggleColorMode } = useColorMode();
 
-  const changeLanguage = (e) => {
-    const locale = e.target.value;
-    router.push(router.pathname, router.asPath, { locale });
-  };
-
   const handleClick = () => {
     setDarkMode(!darkMode);
-  };
-
-  const changeLangMob = () => {
-    setLang(!lang);
-
-    if (lang) {
-      locale = "en";
-    } else {
-      locale = "mn";
-    }
-    router.push(router.pathname, router.asPath, { locale });
   };
 
   const textColor = useColorModeValue("black", "whiteAlpha.900");
@@ -108,26 +91,6 @@ export const HomeNavbar = () => {
             _focus={{ bg: "teal.500" }}
           >
             <FaMoon />
-          </Button>
-        )}
-
-        {lang ? (
-          <Button
-            onClick={changeLangMob}
-            mr={{ base: "2", md: "4" }}
-            variant="outline"
-            _focus={{ bg: "teal.500" }}
-          >
-            🇺🇸
-          </Button>
-        ) : (
-          <Button
-            onClick={changeLangMob}
-            mr={{ base: "2", md: "4" }}
-            variant="outline"
-            _focus={{ bg: "teal.500" }}
-          >
-            🇲🇳
           </Button>
         )}
       </Box>
