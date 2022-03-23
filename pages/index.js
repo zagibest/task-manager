@@ -752,19 +752,17 @@ export default function Home() {
           mt={{ md: "0", base: "20" }}
         >
           <Box
-            mx="4"
+            // mx="4"
             display="flex"
             flexDir="column"
             alignItems="center"
             w="100%"
           >
-            <Divider />
             <Text
               as="h1"
               fontSize={{ lg: "4xl", base: "3xl" }}
               fontWeight="black"
               mb="5"
-              mt="20"
             >
               NUMO гэж юу вэ?
             </Text>
@@ -773,7 +771,7 @@ export default function Home() {
               fontWeight="light"
               mx={{ md: "40", base: "4" }}
               textAlign={{ md: "center", base: "justify" }}
-              fontSize={{ md: "medium", base: "sm" }}
+              fontSize={{ md: "lg", base: "md" }}
             >
               Numo нь даалгавар, бие даалт, лаб, семинар гээд хийх ёстой зүйлсээ
               нэг дор төлөвлөхөд туслах вэбсайт юм. Хэдийгээр Монгол Улсын Их
@@ -782,7 +780,7 @@ export default function Home() {
             <SimpleGrid
               columns={{ base: 1, md: 3 }}
               spacing={{ base: 5, lg: 8 }}
-              my="16"
+              my="12"
             >
               <Box display="flex" flexDir="column" alignItems="center">
                 <Text
@@ -820,7 +818,7 @@ export default function Home() {
               </Box>
             </SimpleGrid>
 
-            <Box w="100vw" bg="teal.100" mt="12" py="24">
+            <Box w="100%" bg="teal.100" mt="12" py="24">
               <Text
                 fontSize={{ lg: "2xl", base: "xl" }}
                 fontWeight="bold"
@@ -860,7 +858,6 @@ export default function Home() {
             alignItems="center"
             w="100%"
           >
-            <Divider />
             <Text
               as="h1"
               fontSize={{ lg: "4xl", base: "3xl" }}
