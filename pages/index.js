@@ -763,7 +763,7 @@ export default function Home() {
               as="h1"
               fontSize={{ lg: "4xl", base: "3xl" }}
               fontWeight="black"
-              mb="10"
+              mb="5"
               mt="20"
             >
               NUMO гэж юу вэ?
@@ -820,7 +820,7 @@ export default function Home() {
               </Box>
             </SimpleGrid>
 
-            <Box w="100vw" bg="teal.100" mt="12" p="5">
+            <Box w="100vw" bg="teal.100" mt="12" py="24">
               <Text
                 fontSize={{ lg: "2xl", base: "xl" }}
                 fontWeight="bold"
