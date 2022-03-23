@@ -23,6 +23,11 @@ import {
   Tooltip,
   Spinner,
   useColorModeValue,
+  SimpleGrid,
+  Stat,
+  StatLabel,
+  StatNumber,
+  Divider,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 //firebase
@@ -52,6 +57,13 @@ import mn from "../locales/mn";
 import { useRouter } from "next/router";
 //user
 import { useUser } from "@/lib/firebase/useUser";
+
+const backgrounds = [
+  `url("data:image/svg+xml, %3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'560\' height=\'185\' viewBox=\'0 0 560 185\' fill=\'none\'%3E%3Cellipse cx=\'102.633\' cy=\'61.0737\' rx=\'102.633\' ry=\'61.0737\' fill=\'%23ED64A6\' /%3E%3Cellipse cx=\'399.573\' cy=\'123.926\' rx=\'102.633\' ry=\'61.0737\' fill=\'%23F56565\' /%3E%3Cellipse cx=\'366.192\' cy=\'73.2292\' rx=\'193.808\' ry=\'73.2292\' fill=\'%2338B2AC\' /%3E%3Cellipse cx=\'222.705\' cy=\'110.585\' rx=\'193.808\' ry=\'73.2292\' fill=\'%23ED8936\' /%3E%3C/svg%3E")`,
+  `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='185' viewBox='0 0 560 185' fill='none'%3E%3Cellipse cx='457.367' cy='123.926' rx='102.633' ry='61.0737' transform='rotate(-180 457.367 123.926)' fill='%23ED8936'/%3E%3Cellipse cx='160.427' cy='61.0737' rx='102.633' ry='61.0737' transform='rotate(-180 160.427 61.0737)' fill='%2348BB78'/%3E%3Cellipse cx='193.808' cy='111.771' rx='193.808' ry='73.2292' transform='rotate(-180 193.808 111.771)' fill='%230BC5EA'/%3E%3Cellipse cx='337.295' cy='74.415' rx='193.808' ry='73.2292' transform='rotate(-180 337.295 74.415)' fill='%23ED64A6'/%3E%3C/svg%3E")`,
+  `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='185' viewBox='0 0 560 185' fill='none'%3E%3Cellipse cx='102.633' cy='61.0737' rx='102.633' ry='61.0737' fill='%23ED8936'/%3E%3Cellipse cx='399.573' cy='123.926' rx='102.633' ry='61.0737' fill='%2348BB78'/%3E%3Cellipse cx='366.192' cy='73.2292' rx='193.808' ry='73.2292' fill='%230BC5EA'/%3E%3Cellipse cx='222.705' cy='110.585' rx='193.808' ry='73.2292' fill='%23ED64A6'/%3E%3C/svg%3E")`,
+  `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='185' viewBox='0 0 560 185' fill='none'%3E%3Cellipse cx='457.367' cy='123.926' rx='102.633' ry='61.0737' transform='rotate(-180 457.367 123.926)' fill='%23ECC94B'/%3E%3Cellipse cx='160.427' cy='61.0737' rx='102.633' ry='61.0737' transform='rotate(-180 160.427 61.0737)' fill='%239F7AEA'/%3E%3Cellipse cx='193.808' cy='111.771' rx='193.808' ry='73.2292' transform='rotate(-180 193.808 111.771)' fill='%234299E1'/%3E%3Cellipse cx='337.295' cy='74.415' rx='193.808' ry='73.2292' transform='rotate(-180 337.295 74.415)' fill='%2348BB78'/%3E%3C/svg%3E")`,
+];
 
 export default function Home() {
   //language change
@@ -622,112 +634,277 @@ export default function Home() {
   //if user is not logged in showing log in/home page
   else
     return (
-      <Flex
-        alignItems="center"
-        justifyContent="center"
-        minH="100vh"
-        flexDir="column"
-        w="100%"
-        bg={bgColor}
-        color={textColor}
-        overflow="hidden"
-      >
-        <HomeNavbar />
-        <Box
-          display="flex"
-          flexDir={{ md: "row", base: "column" }}
-          mx="2"
-          textAlign="center"
+      <Box bg={bgColor}>
+        <Flex
           alignItems="center"
-          my="5"
-          mt={{ md: "10", base: "20" }}
+          justifyContent="center"
+          minH="100vh"
+          flexDir="column"
+          w="100%"
+          color={textColor}
+          overflow="hidden"
+        >
+          <HomeNavbar />
+          <Box
+            display="flex"
+            flexDir={{ md: "row", base: "column" }}
+            mx="2"
+            textAlign="center"
+            alignItems="center"
+            my="5"
+            mt={{ md: "10", base: "20" }}
+          >
+            <Box
+              flex="1"
+              display="flex"
+              flexDir="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Box w={{ md: "80%", base: "90%" }} textAlign="center">
+                <SlideFade
+                  direction="top"
+                  in={true}
+                  transition={{ enter: { duration: 0.4, delay: 0.3 } }}
+                >
+                  <Text
+                    mt={{ md: "-10", base: "10" }}
+                    fontSize={{ md: "5xl", base: "4xl" }}
+                    fontWeight="900"
+                    color={textColor}
+                    fontFamily="heading"
+                    as="h1"
+                  >
+                    {language.homeTop}
+                  </Text>
+                </SlideFade>
+                <SlideFade
+                  direction="top"
+                  in={true}
+                  transition={{ enter: { duration: 0.4, delay: 0.5 } }}
+                >
+                  <Text
+                    fontSize={{ md: "7xl", base: "5xl" }}
+                    fontWeight="900"
+                    bgGradient="linear(to-l, teal.400, teal.500)"
+                    bgClip="text"
+                    // mt="-5"
+                    fontFamily="heading"
+                    as="h1"
+                  >
+                    {language.homeBottom}
+                  </Text>
+                </SlideFade>
+              </Box>
+              <Box
+                w={{ md: "80%", base: "90%" }}
+                mb={{ md: "10", base: "5" }}
+                mt="2"
+              >
+                <SlideFade
+                  direction="top"
+                  in={true}
+                  transition={{ enter: { duration: 0.4, delay: 0.5 } }}
+                >
+                  <Text fontWeight="light" fontSize="lg" textAlign="center">
+                    {language.homeDetail}
+                  </Text>
+                </SlideFade>
+              </Box>
+
+              <FirebaseAuth />
+            </Box>
+            <Box
+              flex="1"
+              // w={{ md: "100%", base: "200vw" }}
+              mb={{ base: "-10", md: 0 }}
+              position={"relative"}
+              mx="5"
+            >
+              <SlideFade
+                direction="top"
+                in={true}
+                transition={{ enter: { duration: 0.4, delay: 0.7 } }}
+              >
+                <Image
+                  src="./images/mac-mock.png"
+                  w={{ md: "90%", base: "100%" }}
+                  m="auto"
+                  mt={{ md: 0, base: "10" }}
+                  alt="NUMo being used on macbook"
+                  display={{ base: "none", md: "block" }}
+                />
+                <Image
+                  src="./images/ip-mock.png"
+                  w={{ md: "90%", base: "100%" }}
+                  display={{ md: "none" }}
+                />
+              </SlideFade>
+            </Box>
+          </Box>
+        </Flex>
+        <Box
+          minH="100vh"
+          w="100%"
+          display="flex"
+          // alignItems="center"
+          justifyContent="center"
+          mt={{ md: "0", base: "20" }}
         >
           <Box
-            flex="1"
+            mx="4"
             display="flex"
             flexDir="column"
             alignItems="center"
-            justifyContent="center"
+            w="100%"
           >
-            <Box w={{ md: "80%", base: "90%" }} textAlign="center">
-              <SlideFade
-                direction="top"
-                in={true}
-                transition={{ enter: { duration: 0.4, delay: 0.3 } }}
-              >
-                <Text
-                  mt={{ md: "-10", base: "10" }}
-                  fontSize={{ md: "5xl", base: "4xl" }}
-                  fontWeight="900"
-                  color={textColor}
-                  fontFamily="heading"
-                >
-                  {language.homeTop}
-                </Text>
-              </SlideFade>
-              <SlideFade
-                direction="top"
-                in={true}
-                transition={{ enter: { duration: 0.4, delay: 0.5 } }}
-              >
-                <Text
-                  fontSize={{ md: "7xl", base: "5xl" }}
-                  fontWeight="900"
-                  bgGradient="linear(to-l, teal.400, teal.500)"
-                  bgClip="text"
-                  // mt="-5"
-                  fontFamily="heading"
-                >
-                  {language.homeBottom}
-                </Text>
-              </SlideFade>
-            </Box>
-            <Box
-              w={{ md: "80%", base: "90%" }}
-              mb={{ md: "10", base: "5" }}
-              mt="2"
+            <Divider />
+            <Text
+              as="h1"
+              fontSize={{ lg: "4xl", base: "3xl" }}
+              fontWeight="black"
+              mb="10"
+              mt="20"
             >
-              <SlideFade
-                direction="top"
-                in={true}
-                transition={{ enter: { duration: 0.4, delay: 0.5 } }}
-              >
-                <Text fontWeight="light" fontSize="lg" textAlign="center">
-                  {language.homeDetail}
+              NUMO гэж юу вэ?
+            </Text>
+            <Text
+              mb="10"
+              fontWeight="light"
+              mx={{ md: "40", base: "4" }}
+              textAlign={{ md: "center", base: "justify" }}
+              fontSize={{ md: "medium", base: "sm" }}
+            >
+              Numo нь даалгавар, бие даалт, лаб, семинар гээд хийх ёстой зүйлсээ
+              нэг дор төлөвлөхөд туслах вэбсайт юм. Хэдийгээр Монгол Улсын Их
+              Сургуулийн оюутнуудад зориулж хийгдсэн ч бүх хүнд нээлттэй.
+            </Text>
+            <SimpleGrid
+              columns={{ base: 1, md: 3 }}
+              spacing={{ base: 5, lg: 8 }}
+              my="16"
+            >
+              <Box display="flex" flexDir="column" alignItems="center">
+                <Text
+                  fontSize={{ lg: "3xl", base: "xl" }}
+                  // display="inline"
+                  fontWeight="bold"
+                >
+                  NUM
                 </Text>
-              </SlideFade>
-            </Box>
+                <Text fontWeight="light">
+                  (National University of Mongolia)
+                </Text>
+              </Box>
 
-            <FirebaseAuth />
-          </Box>
-          <Box
-            flex="1"
-            // w={{ md: "100%", base: "200vw" }}
-            mb={{ base: "-10", md: 0 }}
-            position={"relative"}
-            mx="5"
-          >
-            <SlideFade
-              direction="top"
-              in={true}
-              transition={{ enter: { duration: 0.4, delay: 0.7 } }}
-            >
-              <Image
-                src="./images/mac-mock.png"
-                w={{ md: "90%", base: "100%" }}
-                m="auto"
-                mt={{ md: 0, base: "10" }}
-                alt="NUMo being used on macbook"
-                display={{ base: "none", md: "block" }}
-              />
-              <Image
-                src="./images/ip-mock.png"
-                w={{ md: "90%", base: "100%" }}
-                display={{ md: "none" }}
-              />
-            </SlideFade>
+              <Box display="flex" flexDir="column" alignItems="center">
+                <Text
+                  fontSize={{ lg: "3xl", base: "xl" }}
+                  // display="inline"
+                  fontWeight="bold"
+                >
+                  O
+                </Text>
+                <Text fontWeight="light">(Organize)</Text>
+              </Box>
+
+              <Box display="flex" flexDir="column" alignItems="center">
+                <Text
+                  fontSize={{ lg: "3xl", base: "xl" }}
+                  // display="inline"
+                  fontWeight="bold"
+                >
+                  NUMO
+                </Text>
+                <Text fontWeight="light">(MEMO гэдэг шиг)</Text>
+              </Box>
+            </SimpleGrid>
+
+            <Box w="100vw" bg="teal.100" mt="12" p="5">
+              <Text
+                fontSize={{ lg: "2xl", base: "xl" }}
+                fontWeight="bold"
+                fontStyle="italic"
+                textAlign="center"
+                mx={{ md: "40", base: "4" }}
+                color="black"
+              >
+                "Тогтмол хийх зүйлсээ бичиж тэмдгэлдэг хүн илүү стресс багатай
+                байдаг"
+              </Text>
+              <Text
+                mt="5"
+                fontSize={{ lg: "md", base: "sm" }}
+                fontWeight="light"
+                textAlign="right"
+                mx={{ md: "40", base: "4" }}
+                color="black"
+              >
+                - Манай BuJo хөтөлдөг найз
+              </Text>
+            </Box>
           </Box>
         </Box>
-      </Flex>
+        <Box
+          minH="90vh"
+          w="100%"
+          display="flex"
+          // alignItems="center"
+          justifyContent="center"
+          mt={{ md: "0", base: "20" }}
+        >
+          <Box
+            mx="4"
+            display="flex"
+            flexDir="column"
+            alignItems="center"
+            w="100%"
+          >
+            <Divider />
+            <Text
+              as="h1"
+              fontSize={{ lg: "4xl", base: "3xl" }}
+              fontWeight="black"
+              mb="10"
+              mt="20"
+            >
+              NUMO хэрэглэгчид
+            </Text>
+            <SimpleGrid
+              columns={{ base: 1, md: 3 }}
+              spacing={{ base: 5, lg: 8 }}
+            >
+              <Stat
+                px={{ base: 2, md: 4 }}
+                py={"5"}
+                border={"1px solid"}
+                rounded={"lg"}
+              >
+                <StatLabel>NUMO хэрэглэгчийн тоо</StatLabel>
+                <StatNumber>23</StatNumber>
+              </Stat>
+              <Stat
+                px={{ base: 2, md: 4 }}
+                py={"5"}
+                border={"1px solid"}
+                rounded={"lg"}
+              >
+                <StatLabel>NUMO дээр нэмсэн даалгаварууд</StatLabel>
+                <StatNumber>84</StatNumber>
+              </Stat>
+              <Stat
+                px={{ base: 2, md: 4 }}
+                py={"5"}
+                border={"1px solid"}
+                rounded={"lg"}
+              >
+                <StatLabel>NUMO нийт зочилсон</StatLabel>
+                <StatNumber>155</StatNumber>
+              </Stat>
+            </SimpleGrid>
+          </Box>
+        </Box>
+        <Footer />
+      </Box>
     );
 }

@@ -61,13 +61,6 @@ export const HomeNavbar = () => {
         display="flex"
         alignItems="center"
       >
-        <Button
-          mr={{ base: "2", md: "4" }}
-          variant="outline"
-          _focus={{ bg: "teal.500" }}
-        >
-          {language.usageButtonText}
-        </Button>
         {darkMode ? (
           <Button
             mr={{ base: "2", md: "4" }}
@@ -97,3 +90,12 @@ export const HomeNavbar = () => {
     </Box>
   );
 };
+
+//zaawar button here
+// <Button
+//           mr={{ base: "2", md: "4" }}
+//           variant="outline"
+//           _focus={{ bg: "teal.500" }}
+//         >
+//           {language.usageButtonText}
+//         </Button>

@@ -3,7 +3,7 @@ import { Box, Link, Text } from "@chakra-ui/react";
 export const Footer = () => {
   return (
     <Box
-      h="8vh"
+      h="10vh"
       display="flex"
       alignItems="center"
       bg="teal.500"
